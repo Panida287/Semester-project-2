@@ -1,2 +1,5 @@
+import {renderFooter} from "../../utilities/footer.js";
+import {renderHeader} from "../../utilities/header.js";
 
-document.body.innerHTML = "<h1>Hello, this is home</h1>";
+renderHeader();
+renderFooter();

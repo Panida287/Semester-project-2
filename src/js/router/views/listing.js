@@ -1,3 +1,5 @@
-document.body.innerHTML = "<h1>Hello, this specific pet</h1>";
+import {renderFooter} from "../../utilities/footer.js"
+import {renderHeader} from "../../utilities/header.js";
 
-console.log("this specific pet page");
+renderHeader()
+renderFooter();
