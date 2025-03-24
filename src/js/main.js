@@ -1,7 +1,3 @@
-import '../css/style.css'
+import router from "./router/index.js";
 
-document.querySelector('#app').innerHTML = `
-  <div>
-   <h1 class="text-3xl font-bold text-orange-500">Welcome to Pet Adoption!</h1>
-  </div>
-`
+await router(window.location.pathname);
