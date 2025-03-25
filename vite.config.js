@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
     appType: "mpa",
-    base: "Semester-project-2",
+    base: "/",
     build: {
         target: "esnext",
         rollupOptions: {
