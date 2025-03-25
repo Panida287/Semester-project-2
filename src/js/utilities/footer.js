@@ -5,26 +5,29 @@ export function renderFooter() {
     const path = window.location.pathname;
     const isMobile = window.innerWidth <= 480;
 
-    const activeClass = "text-white";
-    const inactiveClass = "text-black";
+    const activeClass = "text-text bg-primary py-4 px-5 rounded-full";
+    const inactiveClass = "text-text py-4 px-5";
 
     if (isMobile) {
         footer.innerHTML = `
-      <div class="bg-[#F4A261] flex justify-around items-center py-3 rounded-t-3xl w-full z-50">
-        <a href="/" class="${path === '/' || path === '/index.html' ? activeClass : inactiveClass} text-xl">
+      <div class="bg-accent flex justify-around items-center mx-auto py-3 rounded-full w-80 h-20 z-50 m-5 drop-shadow-lg">
+        <a href="/" class="${path === "/" || path === "/index.html" ? activeClass : inactiveClass} text-xl">
           <i class="fas fa-home"></i>
         </a>
-        <a href="/listing" class="${path.includes('listing') ? activeClass : inactiveClass} text-xl">
-          <i class="fas fa-bag-shopping"></i>
+        <a href="/listing" class="${path.includes("listing") ? activeClass : inactiveClass} text-xl">
+          <i class="fa-solid fa-paw"></i>
         </a>
-        <a href="#" class="${path.includes('search') ? activeClass : inactiveClass} text-xl">
-        <i class="fas fa-search"></i>
-      </a>
+        <a href="#" class="${path.includes("favourite") ? activeClass : inactiveClass} text-xl">
+            <i class="fa-solid fa-heart"></i>
+        </a>
+        <a href="#" class="${path.includes("search") ? activeClass : inactiveClass} text-xl">
+            <i class="fas fa-search"></i>
+        </a>
       </div>
     `;
     } else {
         footer.innerHTML = `
-      <div class="bg-[#121826] text-white px-10 md:px-20 py-10 flex flex-wrap gap-10 justify-between text-sm">
+      <div class="bg-secondary text-white px-10 md:px-20 py-10 flex flex-wrap gap-10 justify-between text-sm">
         <div class="flex-1 min-w-[200px]">
           <h4 class="text-lg font-semibold mb-2">About PetPal</h4>
           <p>Helping pets find loving homes since 2025.</p>
@@ -52,7 +55,7 @@ export function renderFooter() {
           <p class="mb-2">Subscribe for updates and exclusive offers!</p>
           <form class="flex">
             <input type="email" placeholder="Your email" class="px-3 py-2 rounded-l-full w-full text-black">
-            <button type="submit" class="bg-[#E76F51] text-white px-4 py-2 rounded-r-full">
+            <button type="submit" class="bg-primary text-white px-4 py-2 rounded-r-full">
               <i class="fas fa-paper-plane"></i>
             </button>
           </form>
