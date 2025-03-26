@@ -11,8 +11,149 @@
 </head>
 <body>
 <header id="header"></header>
-<main id="main"></main>
+<main id="main">
+    <div id="pet-details"></div>
+</main>
 <footer id="footer"></footer>
+
+<template id="pet-details-template-mobile">
+    <section class="max-w-sm mx-auto bg-white rounded-xl overflow-hidden shadow-lg flex flex-col h-full">
+        <div class="flex justify-between items-center px-4 py-3 border-b">
+            <button class="text-xl">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <h2 class="font-semibold text-lg">Pet Details</h2>
+            <button class="text-xl text-red-400">
+                <i class="fa-regular fa-heart"></i>
+            </button>
+        </div>
+
+        <img class="w-full h-64 object-cover" src="" alt="Pet photo" />
+
+        <div class="p-4 space-y-4">
+            <div class="flex justify-between items-center">
+                <h2 class="text-xl font-bold pet-name">Pet Name</h2>
+                <span class="bg-primary text-white py-2 px-4 rounded-full pet-gender">Gender</span>
+            </div>
+            <p class="text-gray-500 breed">Breed</p>
+
+            <div class="flex justify-between text-center text-sm">
+                <div>
+                    <p class="text-gray-500">Age</p>
+                    <p class="font-bold pet-age">–</p>
+                </div>
+                <div>
+                    <p class="text-gray-500">Size</p>
+                    <p class="font-bold pet-size">–</p>
+                </div>
+                <div>
+                    <p class="text-gray-500">Color</p>
+                    <p class="font-bold pet-color">–</p>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-semibold">About</h3>
+                <p class="text-sm text-gray-700 pet-description mt-1">–</p>
+            </div>
+
+            <div>
+                <h3 class="font-semibold">Adoption Status</h3>
+                <ul class="list-none space-y-1 text-sm text-gray-700 pet-adoptionStatus mt-1">
+                </ul>
+            </div>
+
+            <div class="flex items-center gap-3 mt-4">
+                <img src="" alt="Shelter avatar" class="w-10 h-10 rounded-full object-cover shelter-avatar" />
+                <div>
+                    <p class="font-semibold shelter-name">–</p>
+                    <p class="text-sm text-gray-500 shelter-location">–</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center px-4 py-3 border-t mt-auto">
+            <div>
+                <p class="text-sm text-gray-500">Adoption Fee</p>
+                <p class="text-lg font-bold pet-fee">$–</p>
+            </div>
+            <button class="button bg-primary text-white">
+                Adopt <span class="pet-name">Pet</span>
+            </button>
+        </div>
+    </section>
+</template>
+
+<template id="pet-details-template-desktop">
+    <section class="max-w-6xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white rounded-xl shadow-lg">
+
+        <div class="space-y-4">
+            <img
+                src=""
+                alt="Pet photo"
+                class="w-full h-96 object-cover rounded-lg pet-main-img"
+            />
+
+            <div class="grid grid-cols-4 gap-4">
+            </div>
+        </div>
+
+        <div class="details flex flex-col justify-between p-4">
+            <div class="space-y-4">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h2 class="text-3xl font-bold pet-name">Buddy</h2>
+                        <p class="text-gray-600 pet-meta">Golden Retriever • Male • 2 years old</p>
+                    </div>
+                    <button class="text-2xl text-gray-400 hover:text-red-400">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                </div>
+
+                <div class="flex flex-wrap gap-3">
+                    <div class="bg-gray-100 px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-weight-scale"></i>
+                        <span>Size: <span class="font-semibold pet-size">medium</span></span>
+                    </div>
+                    <div class="bg-gray-100 px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-house"></i>
+                        <span>House Trained: <span class="font-semibold pet-trained">Yes</span></span>
+                    </div>
+                    <div class="bg-gray-100 px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-heart-circle-check"></i>
+                        <span>Health: <span class="font-semibold pet-health">Vaccinated</span></span>
+                    </div>
+                    <div class="bg-gray-100 px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-children"></i>
+                        <span>Good with: <span class="font-semibold pet-good-with">Kids</span></span>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-lg">About <span class="pet-name">Buddy</span></h3>
+                    <p class="text-sm text-gray-700 mt-1 pet-description">
+                        – About description goes here –
+                    </p>
+                </div>
+
+                <div class="bg-gray-50 border p-4 rounded-xl space-y-2">
+                    <h4 class="font-semibold">Adoption Details</h4>
+                    <p class="text-sm text-gray-700"><i class="fa-solid fa-location-dot mr-2"></i>Location: <span class="pet-location">–</span></p>
+                    <p class="text-sm text-gray-700"><i class="fa-solid fa-dollar-sign mr-2"></i>Adoption Fee: <span class="pet-fee">$–</span></p>
+                </div>
+            </div>
+
+            <div class="mt-6 flex gap-4 w-full justify-between my-4">
+                <button class="button bg-primary hover:bg-orange-700">
+                    <i class="fa-solid fa-paw mr-2"></i> Adopt <span class="pet-name">Buddy</span>
+                </button>
+                <button class="button bg-gray-500 hover:bg-gray-400">
+                    <i class="fa-regular fa-message mr-2"></i> Contact Shelter
+                </button>
+            </div>
+        </div>
+    </section>
+</template>
 
 </body>
 </html>
