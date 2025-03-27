@@ -25,10 +25,7 @@ export function RenderSpecificPetDetail(pet) {
 
     container.innerHTML = "";
 
-    const isMobile = window.innerWidth <= 480;
-    const templateId = isMobile
-        ? "pet-details-template-mobile"
-        : "pet-details-template-desktop";
+    const templateId = "pet-details-template";
 
 
     const template = document.getElementById(templateId);
@@ -58,55 +55,41 @@ export function RenderSpecificPetDetail(pet) {
     }
 
     if (clone.querySelector(".pet-size")) {
-        clone.querySelector(".pet-size").textContent = pet.size || "–";
+        clone.querySelector(".pet-size").textContent = pet.size;
     }
 
     if (clone.querySelector(".pet-color")) {
-        clone.querySelector(".pet-color").textContent = pet.color || "–";
+        clone.querySelector(".pet-color").textContent = pet.color;
     }
 
     if (clone.querySelector(".pet-description")) {
         clone.querySelector(".pet-description").textContent = pet.description;
     }
 
-    if (clone.querySelector(".pet-trained")) {
-        clone.querySelector(".pet-trained").textContent = "Yes";
-    }
-
     if (clone.querySelector(".pet-adoptionStatus")) {
-        clone.querySelector(".pet-adoptionStatus").textContent = pet.adoptionStatus || "–";
-    }
-
-    if (clone.querySelector(".pet-good-with")) {
-        clone.querySelector(".pet-good-with").textContent = "Family";
+        clone.querySelector(".pet-adoptionStatus").textContent = pet.adoptionStatus;
     }
 
     if (clone.querySelector(".pet-location")) {
-        clone.querySelector(".pet-location").textContent = pet.location || "Unknown";
+        clone.querySelector(".pet-location").textContent = pet.location;
     }
 
-    if (clone.querySelector(".pet-fee")) {
-        clone.querySelector(".pet-fee").textContent = "500kr";
+    if (clone.querySelector(".owner-avatar")) {
+        clone.querySelector(".owner-avatar").src = pet.owner?.avatar?.url || "fallback-avatar.jpg";
+        clone.querySelector(".owner-avatar").alt = pet.owner?.avatar?.alt || pet.owner?.name;
     }
 
-    if (clone.querySelector(".shelter-avatar")) {
-        clone.querySelector(".shelter-avatar").src = pet.owner?.avatar?.url || "fallback-avatar.jpg";
-        clone.querySelector(".shelter-avatar").alt = pet.owner?.avatar?.alt || pet.owner?.name;
+    if (clone.querySelector(".owner-name")) {
+        clone.querySelector(".owner-name").textContent = pet.owner?.name;
     }
 
-    if (clone.querySelector(".shelter-name")) {
-        clone.querySelector(".shelter-name").textContent = pet.owner?.name || "Unknown";
+    if (clone.querySelector(".owner-email")) {
+        clone.querySelector(".owner-email").textContent = pet.owner?.email;
     }
 
-    if (clone.querySelector(".shelter-location")) {
-        clone.querySelector(".shelter-location").textContent = pet.location;
+    if (clone.querySelector(".owner-bio")) {
+        clone.querySelector(".owner-bio").textContent = pet.owner?.bio;
     }
-
-    if (clone.querySelector(".pet-health")) {
-        clone.querySelector(".pet-health").textContent = "Vaccinated";
-    }
-
-
 
     container.appendChild(clone);
 }
