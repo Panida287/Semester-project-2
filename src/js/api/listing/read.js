@@ -1,12 +1,9 @@
 import { renderHeaders } from "../headers.js";
-import { getIdFromUrl } from "../../utilities/getId.js";
 import { API_PETS } from "../constants.js";
 
 export async function getListings(petId = null) {
     const myHeaders = renderHeaders();
-    const ID = getIdFromUrl(petId);
-
-    const endpoint = ID ? `${API_PETS}/${ID}` : API_PETS;
+    const endpoint = petId ? `${API_PETS}/${petId}` : API_PETS;
 
     try {
         const response = await fetch(endpoint, {
