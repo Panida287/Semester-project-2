@@ -1,23 +1,63 @@
 import {FALLBACK_IMG, FALLBACK_AVATAR} from "../../api/constants.js";
+import {getListings} from "../../api/listing/read.js";
 
-export function renderPetCard( data ) {
+export function petCard(data) {
     const template = document.getElementById("pet-card-template");
     const clone = template.content.cloneNode(true);
+
     const img = clone.querySelector("img");
     img.src = data.image?.url || FALLBACK_IMG;
     img.alt = data.image?.alt || data.name;
     img.onerror = () => {
         img.src = FALLBACK_IMG;
     };
+
     const statusBadge = clone.querySelector(".adoptionStatus");
-    statusBadge.textContent = data.adoptionStatus;
-    clone.querySelector("img").alt = data.name.alt || data.name;
+    statusBadge.textContent = data.adoptionStatus || "Available";
+
     clone.querySelector(".pet-name").textContent = data.name;
-    clone.querySelector(".pet-age").textContent = data.age;
+    clone.querySelector(".pet-age").textContent = `${data.age} years`;
     clone.querySelector(".pet-breed").textContent = data.breed;
     clone.querySelector(".pet-location").textContent = data.location;
 
+    const detailsBtn = clone.querySelector(".pet-details-btn");
+    if (detailsBtn) {
+        detailsBtn.addEventListener("click", () => {
+            const petId = data.id;
+            if (petId) {
+                window.location.href = `/listing/${petId}`;
+            } else {
+                console.error("No pets ID found");
+            }
+        })
+    }
+
     return clone;
+}
+
+
+export async function renderPetCard(pets = null) {
+    const container = document.getElementById("pet-card-container");
+    container.innerHTML = "";
+
+    try {
+        const response = pets ? { data: pets } : await getListings();
+        const petList = response.data;
+
+        if (!petList || petList.length === 0) {
+            container.innerHTML = `<h1>No pets found</h1>`;
+            return;
+        }
+
+        petList.forEach(pet => {
+            const card = petCard(pet);
+            container.appendChild(card);
+        });
+
+    } catch (error) {
+        console.error("Fetch failed:", error);
+        container.innerHTML = `<h1>Failed to Load. Please try again later</h1>`;
+    }
 }
 
 export function RenderSpecificPetDetail(pet) {
