@@ -11,11 +11,9 @@ export function petCard(data) {
     img.onerror = () => {
         img.src = FALLBACK_IMG;
     };
-
-    const statusBadge = clone.querySelector(".adoptionStatus");
-    statusBadge.textContent = data.adoptionStatus || "Available";
-
+    
     clone.querySelector(".pet-name").textContent = data.name;
+    clone.querySelector(".adoptionStatus").textContent = data.adoptionStatus;
     clone.querySelector(".pet-age").textContent = `${data.age} years`;
     clone.querySelector(".pet-breed").textContent = data.breed;
     clone.querySelector(".pet-location").textContent = data.location;
