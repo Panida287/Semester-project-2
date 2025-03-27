@@ -22,9 +22,10 @@ main {
     flex-grow: 1;
 }
 
-button {
+.button {
     cursor: pointer;
     padding: 0.5rem 1rem;
     border-radius: 50rem;
     font-family: 'Poppins', sans-serif;
+    transition: all;
 }

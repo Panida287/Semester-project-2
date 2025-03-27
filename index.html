@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <link rel="stylesheet" href="src/css/style.css" />
@@ -8,12 +8,104 @@
     <script type="module" src="/src/js/main.js"></script>
     <script src="https://kit.fontawesome.com/23a7bf8149.js" crossorigin="anonymous"></script>
     <title>Pet Adoption</title>
-  </head>
-  <body>
-    <header id="header"></header>
-    <main id="main"></main>
-    <footer id="footer"></footer>
+</head>
+<body>
+<header id="header"></header>
 
+<main id="main">
+    <section class="hero max-w-[1000px] mx-auto relative">
+        <div class="relative w-full">
+            <img
+                class="hero-img w-full max-h-96 object-cover lg:max-h-[500px]"
+                src="assets/images/hero.png"
+                alt="image of cat and dog"
+            />
 
-  </body>
+            <div class="absolute inset-0 bg-black/50 z-10"></div>
+
+            <div
+                class="hero-content absolute inset-0 z-20 flex flex-col justify-center items-center text-white text-center px-4">
+                <h1 class="text-4xl md:text-5xl font-bold">Find Your New Best Friend</h1>
+                <p class="text-lg md:text-xl mt-2">Adopt a pet and change a life today.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="category my-4 max-w-[1000px] mx-auto p-4">
+        <h2 class="text-2xl font-bold text-secondary mb-4">
+            Browse by Category
+        </h2>
+        <div class="grid grid-cols-2 gap-4 justify-items-center lg:grid-cols-4">
+            <button id="cats-btn"
+                    class="button flex bg-primary w-40 py-3 gap-2 flex-col justify-center items-center">
+                <i class="fa-solid fa-cat text-2xl"></i>
+                Cats
+            </button>
+            <button id="dogs-btn"
+                    class="button flex bg-primary w-40 py-3 gap-2 flex-col justify-center items-center">
+                <i class="fa-solid fa-dog text-2xl"></i>
+                Dogs
+            </button>
+            <button id="birds-btn"
+                    class="button flex bg-primary w-40 py-3 gap-2 flex-col justify-center items-center">
+                <i class="fa-solid fa-bird text-2xl"></i>
+                Birds
+            </button>
+            <button id="others-btn"
+                    class="button flex bg-primary w-40 py-3 gap-2 flex-col justify-center items-center">
+                <i class="fa-solid fa-monkey"></i>
+                Other animals
+            </button>
+        </div>
+    </section>
+
+    <section id="card-container"
+             class="grid w-full max-w-[1200px] justify-center px-6 gap-8 my-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div id="loading-div"
+             class="hidden flex-col justify-center items-center w-auto h-full m-20">
+            <i class="fa-solid fa-cat fa-bounce text-[100px]"></i>
+            <h1 class="font-bold text-primary text-3xl"
+            >
+                Loading...
+            </h1>
+        </div>
+    </section>
+</main>
+<footer id="footer"></footer>
+
+<template id="pet-card-template">
+    <div class="bg-white rounded-xl shadow-md overflow-hidden max-w-sm relative">
+        <img src="" alt="Pet photo" class="w-full h-60 object-cover">
+        <span class="adoptionStatus absolute top-3 right-3 bg-green-400 text-white text-sm font-semibold px-3 py-1 rounded-full">
+      Adoptable
+    </span>
+        <div class="p-4">
+            <h3 class="text-lg font-bold text-gray-900 pet-name">Pet Name</h3>
+            <p class="flex items-center text-gray-600 text-sm mt-1">
+            <span class="mr-2">
+              <i class="fa-solid fa-calendar-days"></i>
+            </span>
+                <span class="pet-age">Age</span>
+            </p>
+            <p class="flex items-center text-gray-600 text-sm mt-1">
+            <span class="mr-2">
+              <i class="fa-solid fa-paw"></i>
+            </span>
+                <span class="pet-breed">Breed</span>
+            </p>
+            <p class="flex items-center text-gray-600 text-sm mt-1">
+            <span class="mr-2">
+              <i class="fa-solid fa-location-dot"></i>
+            </span>
+                <span class="pet-location">Location</span>
+            </p>
+
+            <button class="button bg-primary text-white w-full mt-4 shadow-lg hover:bg-orange-400 transition">
+                View Details
+            </button>
+        </div>
+    </div>
+</template>
+
+</body>
 </html>
