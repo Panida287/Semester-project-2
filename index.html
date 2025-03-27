@@ -59,7 +59,7 @@
         </div>
     </section>
 
-    <section id="card-container"
+    <section id="pet-card-container"
              class="grid w-full max-w-[1200px] justify-center px-6 gap-8 my-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <div id="loading-div"
              class="hidden flex-col justify-center items-center w-auto h-full m-20">
@@ -76,7 +76,7 @@
 <template id="pet-card-template">
     <div class="bg-white rounded-xl shadow-md overflow-hidden max-w-sm relative">
         <img src="" alt="Pet photo" class="w-full h-60 object-cover">
-        <span class="adoptionStatus absolute top-3 right-3 bg-green-400 text-white text-sm font-semibold px-3 py-1 rounded-full">
+        <span class="pet-adoptionStatus absolute top-3 right-3 bg-green-400 text-white text-sm font-semibold px-3 py-1 rounded-full">
       Adoptable
     </span>
         <div class="p-4">
@@ -100,7 +100,7 @@
                 <span class="pet-location">Location</span>
             </p>
 
-            <button class="button bg-primary text-white w-full mt-4 shadow-lg hover:bg-orange-400 transition">
+            <button class="button pet-details-btn bg-primary text-white w-full mt-4 shadow-lg hover:bg-orange-400 transition">
                 View Details
             </button>
         </div>
