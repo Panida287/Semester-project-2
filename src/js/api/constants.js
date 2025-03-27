@@ -1,4 +1,4 @@
-export const FALLBACK_AVATAR = "../assets/images/avatar-fallback.png";
+export const FALLBACK_AVATAR = "../assets/images/avatar-fallback.jpg";
 export const FALLBACK_IMG = "../assets/images/fallback-image.png";
 
 export const API_KEY = "0876d63b-6108-4b3f-a47b-398537cdec93";
