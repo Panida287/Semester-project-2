@@ -1,4 +1,4 @@
-import {FALLBACK_IMG} from "../../api/constants.js";
+import {FALLBACK_IMG, FALLBACK_AVATAR} from "../../api/constants.js";
 
 export function renderPetCard( data ) {
     const template = document.getElementById("pet-card-template");
@@ -74,10 +74,12 @@ export function RenderSpecificPetDetail(pet) {
         clone.querySelector(".pet-location").textContent = pet.location;
     }
 
-    if (clone.querySelector(".owner-avatar")) {
-        clone.querySelector(".owner-avatar").src = pet.owner?.avatar?.url || "fallback-avatar.jpg";
-        clone.querySelector(".owner-avatar").alt = pet.owner?.avatar?.alt || pet.owner?.name;
-    }
+    const avatarImg = clone.querySelector(".owner-avatar");
+    avatarImg.src = pet.owner?.image?.url || FALLBACK_AVATAR;
+    avatarImg.alt = pet.owner?.image?.alt || pet.owner?.name;
+    avatarImg.onerror = () => {
+        avatarImg.src = FALLBACK_AVATAR;
+    };
 
     if (clone.querySelector(".owner-name")) {
         clone.querySelector(".owner-name").textContent = pet.owner?.name;
