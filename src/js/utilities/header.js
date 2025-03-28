@@ -5,7 +5,7 @@ export function renderHeader() {
     const path = window.location.pathname;
     const isMobile = window.innerWidth <= 480;
 
-    const activeClass = "text-text bg-primary";
+    const activeClass = "text-primary";
     const inactiveClass = "text-black";
 
     if (isMobile) {
@@ -23,9 +23,7 @@ export function renderHeader() {
         <a href="/" class="text-2xl font-bold text-primary">🐾 PetPal</a>
         <nav class="flex gap-8 text-lg">
           <a href="/" class="${path === '/' || path === '/index.html' ? activeClass : inactiveClass} hover:underline">Home</a>
-          <a href="/listing/" class="${path.includes('listing') ? activeClass : inactiveClass} hover:underline">Browse</a>
-          <a href="/#" class="${path.includes('search') ? activeClass : inactiveClass} hover:underline">Search</a>
-          <a href="/login/" class="${path.includes('login') ? activeClass : inactiveClass} hover:underline">Login</a>
+          <a href="/auth/login/" class="${path.includes('login') ? activeClass : inactiveClass} hover:underline">Login</a>
         </nav>
       </div>
     `;
