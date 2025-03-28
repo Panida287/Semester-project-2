@@ -13,8 +13,8 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 main: path.resolve(__dirname, "index.html"),
-                login: path.resolve(__dirname, "login/index.html"),
-                register: path.resolve(__dirname, "register/index.html"),
+                login: path.resolve(__dirname, "auth/login/index.html"),
+                register: path.resolve(__dirname, "auth/register/index.html"),
                 admin: path.resolve(__dirname, "admin/index.html"),
                 listing: path.resolve(__dirname, "listing/index.html"),
             },
