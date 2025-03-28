@@ -10,7 +10,7 @@ export function renderFooter() {
 
     if (isMobile) {
         footer.innerHTML = `
-      <div class="bg-accent flex justify-around items-center mx-auto py-3 rounded-full w-80 h-20 z-50 m-5 drop-shadow-lg">
+      <div class="fixed bottom-0 bg-accent flex justify-around items-center py-3 rounded-full w-80 h-20 z-50 my-2 translate-x-1/2 right-1/2 drop-shadow-lg">
         <a href="/" class="${path === "/" || path === "/index.html" ? activeClass : inactiveClass} text-xl">
           <i class="fas fa-home"></i>
         </a>
