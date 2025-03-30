@@ -29,3 +29,11 @@ main {
     font-family: 'Poppins', sans-serif;
     transition: all;
 }
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #F4A261;
+}

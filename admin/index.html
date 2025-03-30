@@ -12,7 +12,7 @@
 <body>
 <header class="flex items-center justify-between px-6 py-4 bg-white shadow">
     <h1 class="text-xl font-bold text-gray-800">🐾 Pet Admin</h1>
-    <button id="addPetBtn" class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md">
+    <button id="add-btn" class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md">
         + Add Pet
     </button>
 </header>
@@ -38,7 +38,113 @@
     </div>
 </section>
 
-<main id="pet-list" class="grid p-6 max-w-screen-xl mx-auto lg:grid-cols-2 xl:grid-cols-3"></main>
+<main class="h-full w-full">
+    <div id="pet-list"
+         class="grid p-6 max-w-screen-xl mx-auto lg:grid-cols-2 xl:grid-cols-3">
+    </div>
+    <div>
+        <div id="overlay" class="add-pet-form hidden fixed inset-0 z-50 bg-black bg-opacity-50 overflow-y-auto">
+            <div class="flex items-center justify-center min-h-full p-4">
+                <form id="add-pet-form" class="bg-white w-full max-w-sm rounded-xl shadow-lg">
+                    <div class="flex justify-between items-center px-6 py-4 border-b">
+                        <h2 class="text-lg font-semibold">Add New Pet</h2>
+                        <button type="button" class="cancel-btn text-2xl font-bold text-gray-400 hover:text-black">
+                            &times;
+                        </button>
+                    </div>
+
+                    <div class="p-6 space-y-6">
+                        <div>
+                            <label for="name" class="text-sm font-semibold mb-2">Name</label>
+                            <input id="name" type="text" placeholder="Enter pet name"
+                                   class="w-full border rounded-md px-3 py-2 mb-3" required />
+                            <label for="species" class="text-sm font-semibold mb-2">Species</label>
+                            <select id="species" class="w-full border rounded-md px-3 py-2 mb-3" required>
+                                <option>Select species</option>
+                                <option>Dog</option>
+                                <option>Cat</option>
+                                <option>Bird</option>
+                                <option>Other</option>
+                            </select>
+                            <label for="breed" class="text-sm font-semibold mb-2">Breed</label>
+                            <input id="breed" type="text" placeholder="Enter breed"
+                                   class="w-full border rounded-md px-3 py-2 mb-2" required />
+                            <label for="age" class="text-sm font-semibold">Age</label>
+                            <div class="flex gap-3 items-center">
+                                <input id="age" type="number" placeholder="Enter age"
+                                       class="w-32 border rounded-md px-3 py-2" required />
+                                <p>Years</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-sm font-semibold mb-2">Gender</h3>
+                            <div class="flex items-center space-x-4 mb-3">
+                                <label><input type="radio" name="gender" value="male" class="mr-1" /> Male</label>
+                                <label><input type="radio" name="gender" value="female" class="mr-1" /> Female</label>
+                                <label><input type="radio" name="gender" value="unknown" class="mr-1" /> Unknown</label>
+                            </div>
+                            <label for="size" class="text-sm font-semibold mb-2">Size</label>
+                            <select id="size" class="w-full border rounded-md px-3 py-2 mb-3" required>
+                                <option>Select size</option>
+                                <option>Small</option>
+                                <option>Medium</option>
+                                <option>Large</option>
+                            </select>
+                            <label for="color" class="text-sm font-semibold mb-2">Color</label>
+                            <input id="color" type="text" placeholder="Enter color"
+                                   class="w-full border rounded-md px-3 py-2 mb-2"
+                                   required />
+
+                            <label for="description" class="text-sm font-semibold mb-2 pt-4">Description</label>
+                            <textarea
+                                id="description"
+                                placeholder="Describe your pet"
+                                class="w-full border rounded-md px-3 py-2 h-20 resize-none"
+                            ></textarea>
+                        </div>
+
+                        <div>
+                            <label for="location" class="text-sm font-semibold mb-2">Location</label>
+                            <input id="location" type="text" placeholder="Enter location"
+                                   class="w-full border rounded-md px-3 py-2"
+                                   required />
+                        </div>
+
+                        <div>
+                            <label for="image-url" class="text-sm font-semibold mt-4">Pet Image</label>
+                            <input id="image-url" type="url" placeholder="Enter image URL"
+                                   class="w-full border rounded-md px-3 py-2 mb-3"
+                                   required />
+                            <div class="mt-4">
+                                <img
+                                    id="image-preview"
+                                    src=""
+                                    alt="Preview of the item image"
+                                    class="hidden w-full h-48 object-cover border border-gray-300 rounded-md"
+                                />
+                            </div>
+                            <label for="image-alt" class="text-sm font-semibold mb-2">Image Alt Text</label>
+                            <textarea
+                                id="image-alt"
+                                placeholder="Describe the image for accessibility (e.g. “Golden retriever puppy”)"
+                                class="w-full border rounded-md px-3 py-2 h-20 resize-none"
+                            ></textarea>
+                        </div>
+                    </div>
+                    <h3 class="error-div"></h3>
+                    <div class="flex justify-between items-center px-6 py-4 border-t">
+                        <button type="button" class="cancel-btn text-gray-500 hover:text-black">Cancel</button>
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                            Save Pet
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</main>
 
 <template id="pet-card-admin">
     <div class="max-w-lg flex bg-white p-4 m-4 rounded-xl shadow overflow-hidden relative">
@@ -66,7 +172,6 @@
 
     </div>
 </template>
-
 
 </body>
 </html>

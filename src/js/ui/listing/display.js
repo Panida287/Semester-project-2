@@ -1,5 +1,6 @@
 import {FALLBACK_IMG, FALLBACK_AVATAR} from "../../api/constants.js";
-import {getListings} from "../../api/listing/read.js";
+import {getListings} from "../../api/listing/read.js"
+import {deletePet} from "../../api/admin/delete.js";
 
 export function renderPetTemplate( pet, mode = "card" ) {
     const templateId = mode === "detail"
@@ -30,7 +31,7 @@ export function renderPetTemplate( pet, mode = "card" ) {
             statusEl.classList.add("bg-green-500", "text-white");
         } else if (status === "adopted") {
             statusEl.textContent = "Adopted";
-            statusEl.classList.add("bg-blue-600", "text-white");
+            statusEl.classList.add("bg-blue-700", "text-white");
         } else {
             statusEl.textContent = "Pending";
             statusEl.classList.add("bg-yellow-400", "text-black");
@@ -129,8 +130,20 @@ export function renderPetTemplate( pet, mode = "card" ) {
 
         const deleteBtn = clone.querySelector(".delete-btn");
         if (deleteBtn) {
-            deleteBtn.addEventListener("click", () => {
+            deleteBtn.addEventListener("click", async () => {
+                const confirmDelete = confirm(`Delete ${pet.name}?`);
+                if (!confirmDelete) return;
 
+                try {
+                    await deletePet(pet.id);
+                    const card = document.getElementById(`listing-${pet.id}`);
+                    if (card) card.remove();
+                    alert(`${pet.name} deleted successfully!`);
+                    window.location.reload();
+                } catch (error) {
+                    console.error("Failed to delete:", error.message);
+                    alert(`Failed to delete listing: ${error.message}`);
+                }
             });
         }
     }
