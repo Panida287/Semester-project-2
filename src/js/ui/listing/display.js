@@ -1,8 +1,13 @@
 import {FALLBACK_IMG, FALLBACK_AVATAR} from "../../api/constants.js";
 import {getListings} from "../../api/listing/read.js";
 
-export function renderPetTemplate(pet, mode = "card") {
-    const templateId = mode === "detail" ? "pet-details-template" : "pet-card-template";
+export function renderPetTemplate( pet, mode = "card" ) {
+    const templateId = mode === "detail"
+        ? "pet-details-template"
+        : mode === "admin"
+            ? "pet-card-admin"
+            : "pet-card-template";
+
     const template = document.getElementById(templateId);
     const clone = template.content.cloneNode(true);
 
@@ -17,56 +22,73 @@ export function renderPetTemplate(pet, mode = "card") {
 
     const statusEl = clone.querySelector(".pet-adoptionStatus");
     if (statusEl) {
-        const status = pet.adoptionStatus?.toLowerCase() || "contact shelter";
-        statusEl.textContent = pet.adoptionStatus || "Contact shelter";
-
+        const status = pet.adoptionStatus?.toLowerCase();
         statusEl.classList.remove("bg-blue-500", "bg-yellow-400", "bg-green-500", "text-white", "text-black");
-        if (status === "adopted") {
-            statusEl.classList.add("bg-blue-500", "text-white");
-        } else if (status === "available") {
+
+        if (status === "available") {
+            statusEl.textContent = "Available";
             statusEl.classList.add("bg-green-500", "text-white");
+        } else if (status === "adopted") {
+            statusEl.textContent = "Adopted";
+            statusEl.classList.add("bg-blue-600", "text-white");
         } else {
+            statusEl.textContent = "Pending";
             statusEl.classList.add("bg-yellow-400", "text-black");
         }
     }
 
-    if (mode === "card") {
-        clone.querySelector(".pet-age").textContent = `${pet.age} years`;
-        clone.querySelector(".pet-breed").textContent = pet.breed;
-        clone.querySelector(".pet-location").textContent = pet.location;
+    const genderEl = clone.querySelector(".pet-gender");
+    if (genderEl) {
+        const gender = pet.gender?.toLowerCase();
+        genderEl.classList.remove("bg-blue-100", "text-blue-800", "bg-pink-100", "text-pink-800");
 
-        const detailsBtn = clone.querySelector(".pet-details-btn");
-        if (detailsBtn) {
-            detailsBtn.addEventListener("click", () => {
-                const petId = pet.id;
-                if (petId) {
-                    window.location.href = `/listing/?id=${petId}`;
-                }
-            });
+        if (gender === "male" || gender === "boy") {
+            genderEl.textContent = "Male";
+            genderEl.classList.add("bg-blue-100", "text-blue-800");
+        } else if (gender === "female" || gender === "girl") {
+            genderEl.textContent = "Female";
+            genderEl.classList.add("bg-pink-100", "text-pink-800");
+        } else {
+            genderEl.textContent = pet.gender || "Unknown";
+        }
+    }
+
+    const ageEl = clone.querySelector(".pet-age");
+    if (ageEl) ageEl.textContent = `${pet.age} years`;
+
+    const breedEl = clone.querySelector(".pet-breed");
+    if (breedEl) breedEl.textContent = pet.breed;
+
+    const sizeEl = clone.querySelector(".pet-size");
+    if (sizeEl) sizeEl.textContent = pet.size;
+
+    const colorEl = clone.querySelector(".pet-color");
+    if (colorEl) colorEl.textContent = pet.color;
+
+    const descEl = clone.querySelector(".pet-description");
+    if (descEl) descEl.textContent = pet.description;
+
+    const detailsBtn = clone.querySelector(".pet-details-btn");
+    if (detailsBtn) {
+        detailsBtn.addEventListener("click", () => {
+            if (pet.id) {
+                window.location.href = `/listing/?id=${pet.id}`;
+            }
+        });
+    }
+
+    if (mode === "detail") {
+        clone.querySelector(".pet-meta").textContent = `${pet.breed} • ${pet.gender} • ${pet.age} years old`;
+
+        const avatar = clone.querySelector(".owner-avatar");
+        if (avatar) {
+            avatar.src = pet.owner?.avatar?.url || FALLBACK_AVATAR;
+            avatar.alt = pet.owner?.avatar?.alt || pet.owner?.name || "Owner";
+            avatar.onerror = () => (avatar.src = FALLBACK_AVATAR);
         }
 
-    } else if (mode === "detail") {
-        const meta = clone.querySelector(".pet-meta");
-        if (meta) {
-            meta.textContent = `${pet.breed} • ${pet.gender} • ${pet.age} years old`;
-        }
-
-        if (clone.querySelector(".pet-age")) clone.querySelector(".pet-age").textContent = `${pet.age} years`;
-        if (clone.querySelector(".pet-gender")) clone.querySelector(".pet-gender").textContent = pet.gender;
-        if (clone.querySelector(".pet-breed")) clone.querySelector(".pet-breed").textContent = pet.breed;
-        if (clone.querySelector(".pet-size")) clone.querySelector(".pet-size").textContent = pet.size;
-        if (clone.querySelector(".pet-color")) clone.querySelector(".pet-color").textContent = pet.color;
-        if (clone.querySelector(".pet-description")) clone.querySelector(".pet-description").textContent = pet.description;
-
-        const avatarImg = clone.querySelector(".owner-avatar");
-        if (avatarImg) {
-            avatarImg.src = pet.owner?.avatar?.url || FALLBACK_AVATAR;
-            avatarImg.alt = pet.owner?.avatar?.alt || pet.owner?.name;
-            avatarImg.onerror = () => (avatarImg.src = FALLBACK_AVATAR);
-        }
-
-        if (clone.querySelector(".owner-name")) clone.querySelector(".owner-name").textContent = pet.owner?.name;
-        if (clone.querySelector(".owner-email")) clone.querySelector(".owner-email").textContent = pet.owner?.email;
+        clone.querySelector(".owner-name").textContent = pet.owner?.name;
+        clone.querySelector(".owner-email").textContent = pet.owner?.email;
 
         const bioEl = clone.querySelector(".owner-bio");
         if (bioEl) {
@@ -96,12 +118,28 @@ export function renderPetTemplate(pet, mode = "card") {
                 }
             });
         }
+
+    } else if (mode === "admin") {
+        const editBtn = clone.querySelector(".edit-btn");
+        if (editBtn) {
+            editBtn.addEventListener("click", () => {
+
+            });
+        }
+
+        const deleteBtn = clone.querySelector(".delete-btn");
+        if (deleteBtn) {
+            deleteBtn.addEventListener("click", () => {
+
+            });
+        }
     }
 
     return clone;
 }
 
-export async function renderPetCard(petId = null) {
+
+export async function renderPetCard( petId = null ) {
     const cardContainer = document.getElementById("pet-card-container");
     const detailContainer = document.getElementById("pet-details");
 
@@ -120,13 +158,14 @@ export async function renderPetCard(petId = null) {
             detailContainer.appendChild(detailCard);
         } else {
             const response = await getListings();
-            const petList = response.data;
+            const pets = response.data;
 
-            cardContainer.innerHTML = petList.length === 0
-                ? `<h1>No pets found</h1>`
-                : "";
+            if (!pets) {
+                cardContainer.innerHTML = `<h1>No pet found</h1>`;
+                return;
+            }
 
-            petList.forEach(pet => {
+            pets.forEach(pet => {
                 const card = renderPetTemplate(pet, "card");
                 cardContainer.appendChild(card);
             });
