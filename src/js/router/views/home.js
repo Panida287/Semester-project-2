@@ -7,3 +7,11 @@ renderHeader();
 renderFooter();
 renderPetCard()
 setLogoutListener();
+
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("input", (e) => {
+    const term = e.target.value;
+    renderPetCard(null, term);
+});
+

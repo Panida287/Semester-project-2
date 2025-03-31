@@ -12,7 +12,7 @@
 <body>
 <header id="header"></header>
 
-<main id="main">
+<main id="main my-4 w-screen flex flex-col items-center justify-center">
     <section class="hero max-w-[1000px] mx-auto relative">
         <div class="relative w-full">
             <img
@@ -59,15 +59,29 @@
         </div>
     </section>
 
-    <section id="pet-card-container"
-             class="grid w-full max-w-[1200px] justify-center px-6 gap-8 my-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        <div id="loading-div"
-             class="hidden flex-col justify-center items-center w-auto h-full m-20">
-            <i class="fa-solid fa-cat fa-bounce text-[100px]"></i>
-            <h1 class="font-bold text-primary text-3xl"
-            >
-                Loading...
-            </h1>
+    <section class="search-form w-auto px-auto m-10 mb-5 flex justify-center items-center md:px-32">
+        <label for="searchInput" class="block text-xl font-medium text-gray-700 pr-4">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </label>
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search pets..."
+            class="w-full max-w-[600px] px-4 py-2 border rounded-md focus:ring-indigo-500 focus:border-indigo-500 border-gray-300"
+        />
+    </section>
+
+    <section class="w-full mx-auto">
+        <div id="pet-card-container"
+            class="grid w-full max-w-[1200px] mx-auto justify-center items-center px-10 gap-8 my-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div id="loading-div"
+                 class="hidden flex-col justify-center items-center w-auto h-full m-20">
+                <i class="fa-solid fa-cat fa-bounce text-[100px]"></i>
+                <h1 class="font-bold text-primary text-3xl"
+                >
+                    Loading...
+                </h1>
+            </div>
         </div>
     </section>
 </main>
@@ -76,7 +90,8 @@
 <template id="pet-card-template">
     <div class="bg-white rounded-xl shadow-md overflow-hidden max-w-sm relative">
         <img src="" alt="Pet photo" class="w-full h-60 object-cover">
-        <span class="pet-adoptionStatus absolute top-3 right-3 bg-green-400 text-white text-sm font-semibold px-3 py-1 rounded-full">
+        <span
+            class="pet-adoptionStatus absolute top-3 right-3 bg-green-400 text-white text-sm font-semibold px-3 py-1 rounded-full">
       Adoptable
     </span>
         <div class="p-4">
@@ -100,7 +115,8 @@
                 <span class="pet-location">Location</span>
             </p>
 
-            <button class="button pet-details-btn bg-primary text-white w-full mt-4 shadow-lg hover:bg-orange-400 transition">
+            <button
+                class="button pet-details-btn bg-primary text-white w-full mt-4 shadow-lg hover:bg-orange-400 transition">
                 View Details
             </button>
         </div>

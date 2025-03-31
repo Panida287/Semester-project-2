@@ -190,7 +190,7 @@ export function renderPetTemplate( pet, mode = "card" ) {
     return clone;
 }
 
-export async function renderPetCard( petId = null ) {
+export async function renderPetCard(petId = null, searchTerm = "") {
     const cardContainer = document.getElementById("pet-card-container");
     const detailContainer = document.getElementById("pet-details");
 
@@ -209,13 +209,28 @@ export async function renderPetCard( petId = null ) {
             detailContainer.appendChild(detailCard);
         } else {
             const response = await getListings();
-            const pets = response.data;
+            let pets = response.data;
 
             if (!pets) {
                 cardContainer.innerHTML = `<h1>No pet found</h1>`;
                 return;
             }
 
+            if (searchTerm.trim()) {
+                const lowerSearch = searchTerm.toLowerCase();
+                pets = pets.filter(pet =>
+                    pet.name?.toLowerCase().includes(lowerSearch) ||
+                    pet.breed?.toLowerCase().includes(lowerSearch) ||
+                    pet.species?.toLowerCase().includes(lowerSearch)
+                );
+            }
+
+            if (pets.length === 0) {
+                cardContainer.innerHTML = `<h1>No pets match your search.</h1>`;
+                return;
+            }
+
+            cardContainer.innerHTML = "";
             pets.forEach(pet => {
                 const card = renderPetTemplate(pet, "card");
                 cardContainer.appendChild(card);
@@ -232,6 +247,7 @@ export async function renderPetCard( petId = null ) {
         }
     }
 }
+
 
 
 

@@ -1,7 +1,7 @@
 import { renderPetTemplate } from "../listing/display.js";
 import { getListings } from "../../api/listing/read.js";
 
-export async function renderPetCardAdmin() {
+export async function renderPetCardAdmin(searchTerm = "") {
     const cardContainer = document.getElementById("pet-list");
     const loggedInUser = localStorage.getItem("userName");
 
@@ -14,13 +14,23 @@ export async function renderPetCardAdmin() {
             return;
         }
 
-        const userPets = pets.filter(pet => pet.owner?.name === loggedInUser);
+        let userPets = pets.filter(pet => pet.owner?.name === loggedInUser);
+
+        if (searchTerm.trim()) {
+            const lowerSearch = searchTerm.toLowerCase();
+            userPets = userPets.filter(pet =>
+                pet.name?.toLowerCase().includes(lowerSearch) ||
+                pet.breed?.toLowerCase().includes(lowerSearch) ||
+                pet.species?.toLowerCase().includes(lowerSearch)
+            );
+        }
 
         if (userPets.length === 0) {
-            cardContainer.innerHTML = `<h1>You haven't listed any pets yet.</h1>`;
+            cardContainer.innerHTML = `<h1>No pets match your search.</h1>`;
             return;
         }
 
+        cardContainer.innerHTML = "";
         userPets.forEach(pet => {
             const card = renderPetTemplate(pet, "admin");
             cardContainer.appendChild(card);
@@ -31,3 +41,4 @@ export async function renderPetCardAdmin() {
         cardContainer.innerHTML = `<h1>${error.message}</h1>`;
     }
 }
+
