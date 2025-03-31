@@ -1,6 +1,8 @@
 import {FALLBACK_IMG, FALLBACK_AVATAR} from "../../api/constants.js";
-import {getListings} from "../../api/listing/read.js"
+import {getListings} from "../../api/listing/read.js";
 import {deletePet} from "../../api/admin/delete.js";
+import {setEditForm} from "../admin/create-edit.js";
+import {updatePet} from "../../api/admin/update.js";
 
 export function renderPetTemplate( pet, mode = "card" ) {
     const templateId = mode === "detail"
@@ -31,7 +33,7 @@ export function renderPetTemplate( pet, mode = "card" ) {
             statusEl.classList.add("bg-green-500", "text-white");
         } else if (status === "adopted") {
             statusEl.textContent = "Adopted";
-            statusEl.classList.add("bg-blue-700", "text-white");
+            statusEl.classList.add("bg-blue-400", "text-white");
         } else {
             statusEl.textContent = "Pending";
             statusEl.classList.add("bg-yellow-400", "text-black");
@@ -124,7 +126,7 @@ export function renderPetTemplate( pet, mode = "card" ) {
         const editBtn = clone.querySelector(".edit-btn");
         if (editBtn) {
             editBtn.addEventListener("click", () => {
-
+                setEditForm(pet);
             });
         }
 
@@ -146,11 +148,47 @@ export function renderPetTemplate( pet, mode = "card" ) {
                 }
             });
         }
-    }
 
+        const statusBtn = clone.querySelector(".status-btn");
+        const statusMenu = clone.querySelector(".status-menu");
+        const statusOptions = clone.querySelectorAll(".status-option");
+
+        if (statusBtn && statusMenu && statusOptions.length > 0) {
+            statusBtn.addEventListener("click", () => {
+                statusMenu.classList.toggle("hidden");
+            });
+
+            document.addEventListener("click", ( e ) => {
+                if (!statusBtn.contains(e.target) && !statusMenu.contains(e.target)) {
+                    statusMenu.classList.add("hidden");
+                }
+            });
+
+            statusOptions.forEach(option => {
+                option.addEventListener("click", async () => {
+                    const newStatus = option.dataset.value;
+                    if (newStatus === pet.adoptionStatus?.toLowerCase()) return;
+
+                    const confirmed = confirm(`Change status to "${newStatus}" for ${pet.name}?`);
+                    if (!confirmed) return;
+
+                    try {
+                        await updatePet({
+                            id: pet.id,
+                            adoptionStatus: newStatus,
+                        });
+
+                        alert(`Status updated to "${newStatus}"`);
+                        window.location.reload();
+                    } catch (error) {
+                        alert("Failed to update status: " + error.message);
+                    }
+                });
+            });
+        }
+    }
     return clone;
 }
-
 
 export async function renderPetCard( petId = null ) {
     const cardContainer = document.getElementById("pet-card-container");
