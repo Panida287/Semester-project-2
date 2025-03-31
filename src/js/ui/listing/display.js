@@ -71,6 +71,9 @@ export function renderPetTemplate( pet, mode = "card" ) {
     const descEl = clone.querySelector(".pet-description");
     if (descEl) descEl.textContent = pet.description;
 
+    const locationEl = clone.querySelector(".pet-location");
+    if (locationEl) locationEl.textContent = pet.location;
+
     const detailsBtn = clone.querySelector(".pet-details-btn");
     if (detailsBtn) {
         detailsBtn.addEventListener("click", () => {
@@ -190,7 +193,7 @@ export function renderPetTemplate( pet, mode = "card" ) {
     return clone;
 }
 
-export async function renderPetCard(petId = null, searchTerm = "") {
+export async function renderPetCard(petId = null, searchTerm = "", category = "") {
     const cardContainer = document.getElementById("pet-card-container");
     const detailContainer = document.getElementById("pet-details");
 
@@ -225,8 +228,21 @@ export async function renderPetCard(petId = null, searchTerm = "") {
                 );
             }
 
+            if (category && category !== "all") {
+                if (category === "other") {
+                    pets = pets.filter(pet => {
+                        const species = pet.species?.toLowerCase();
+                        return species !== "cat" && species !== "dog";
+                    });
+                } else {
+                    pets = pets.filter(pet =>
+                        pet.species?.toLowerCase() === category.toLowerCase()
+                    );
+                }
+            }
+
             if (pets.length === 0) {
-                cardContainer.innerHTML = `<h1>No pets match your search.</h1>`;
+                cardContainer.innerHTML = `<h1>No pets match your filter.</h1>`;
                 return;
             }
 
@@ -247,6 +263,7 @@ export async function renderPetCard(petId = null, searchTerm = "") {
         }
     }
 }
+
 
 
 
