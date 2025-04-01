@@ -9,3 +9,4 @@ renderFooter();
 const petId = getIdFromUrl("id");
 renderPetCard(petId)
 
+

@@ -17,6 +17,8 @@ export default defineConfig({
                 register: path.resolve(__dirname, "account/register/index.html"),
                 admin: path.resolve(__dirname, "admin/index.html"),
                 pet: path.resolve(__dirname, "pet/index.html"),
+                create: path.resolve(__dirname, "pet/create/index.html"),
+                edit: path.resolve(__dirname, "pet/edit/index.html"),
             },
         },
     },

@@ -1,7 +1,6 @@
 import {FALLBACK_IMG, FALLBACK_AVATAR} from "../../api/constants.js";
 import {getPets} from "../../api/pet/read.js";
 import {deletePet} from "../../api/admin/delete.js";
-import {setEditForm} from "../admin/create-edit.js";
 import {updatePet} from "../../api/admin/update.js";
 
 export function renderPetTemplate( pet, mode = "card" ) {
@@ -77,9 +76,7 @@ export function renderPetTemplate( pet, mode = "card" ) {
     const detailsBtn = clone.querySelector(".pet-details-btn");
     if (detailsBtn) {
         detailsBtn.addEventListener("click", () => {
-            if (pet.id) {
-                window.location.href = `/pet/?id=${pet.id}`;
-            }
+            window.location.href = `/pet/?id=${pet.id}`;
         });
     }
 
@@ -129,7 +126,8 @@ export function renderPetTemplate( pet, mode = "card" ) {
         const editBtn = clone.querySelector(".edit-btn");
         if (editBtn) {
             editBtn.addEventListener("click", () => {
-                setEditForm(pet);
+                window.location.href = `/pet/edit/?id=${pet.id}`;
+
             });
         }
 
@@ -193,7 +191,7 @@ export function renderPetTemplate( pet, mode = "card" ) {
     return clone;
 }
 
-export async function renderPetCard(petId = null, searchTerm = "", category = "") {
+export async function renderPetCard( petId = null, searchTerm = "", category = "" ) {
     const cardContainer = document.getElementById("pet-card-container");
     const detailContainer = document.getElementById("pet-details");
 
@@ -224,7 +222,7 @@ export async function renderPetCard(petId = null, searchTerm = "", category = ""
                 pets = pets.filter(pet =>
                     pet.name?.toLowerCase().includes(lowerSearch) ||
                     pet.breed?.toLowerCase().includes(lowerSearch) ||
-                    pet.species?.toLowerCase().includes(lowerSearch)
+                    pet.species?.toLowerCase().includes(lowerSearch),
                 );
             }
 
@@ -236,7 +234,7 @@ export async function renderPetCard(petId = null, searchTerm = "", category = ""
                     });
                 } else {
                     pets = pets.filter(pet =>
-                        pet.species?.toLowerCase() === category.toLowerCase()
+                        pet.species?.toLowerCase() === category.toLowerCase(),
                     );
                 }
             }
