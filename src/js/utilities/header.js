@@ -23,7 +23,7 @@ export function renderHeader() {
         <a href="/" class="text-2xl font-bold text-primary">🐾 PetPal</a>
         <nav class="flex gap-8 text-lg">
           <a href="/" class="${path === '/' || path === '/index.html' ? activeClass : inactiveClass} hover:underline">Home</a>
-          <a href="/auth/login/" class="${path.includes('login') ? activeClass : inactiveClass} hover:underline">Login</a>
+          <a href="/account/login/" class="${path.includes('login') ? activeClass : inactiveClass} hover:underline">Login</a>
           <button class="button bg-primary logout-btn">Logout</button>
         </nav>
       </div>
