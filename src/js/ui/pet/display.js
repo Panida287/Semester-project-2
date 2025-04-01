@@ -1,7 +1,7 @@
 import {FALLBACK_IMG, FALLBACK_AVATAR} from "../../api/constants.js";
 import {getPets} from "../../api/pet/read.js";
-import {deletePet} from "../../api/admin/delete.js";
-import {updatePet} from "../../api/admin/update.js";
+import {deletePet} from "../../api/pet/delete.js";
+import {updatePet} from "../../api/pet/update.js";
 
 export function renderPetTemplate( pet, mode = "card" ) {
     const templateId = mode === "detail"

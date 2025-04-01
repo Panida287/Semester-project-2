@@ -1,5 +1,5 @@
 import { getPets } from "../../api/pet/read.js";
-import { updatePet } from "../../api/admin/update.js";
+import { updatePet } from "../../api/pet/update.js";
 import { setupPreview } from "../../utilities/preview.js";
 import { getIdFromUrl } from "../../utilities/getId.js";
 

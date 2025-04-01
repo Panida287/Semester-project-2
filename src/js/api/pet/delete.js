@@ -1,4 +1,4 @@
-import { loggedInHeaders } from "../headers";
+import { loggedInHeaders } from "../headers.js";
 import {API_PETS} from "../constants.js";
 
 /**

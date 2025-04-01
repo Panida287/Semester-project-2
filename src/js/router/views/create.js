@@ -1,4 +1,4 @@
-import {createPet} from "../../api/admin/create.js";
+import {createPet} from "../../api/pet/create.js";
 import {setupPreview} from "../../utilities/preview.js";
 
 const form = document.getElementById("create-form");
