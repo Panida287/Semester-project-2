@@ -3,7 +3,7 @@
  *
  * @param {HTMLInputElement} imageUrlInput - The media URL input element.
  * @param {HTMLImageElement} previewImage - The image element for the preview.
- * @param {string} [title=""] - The title of the listing (used as alt text).
+ * @param {string} [title=""] - The title of the pet (used as alt text).
  */
 export function setupPreview(imageUrlInput, previewImage, title = "") {
     const updatePreview = () => {

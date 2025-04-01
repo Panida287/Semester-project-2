@@ -1,5 +1,5 @@
 import {FALLBACK_IMG, FALLBACK_AVATAR} from "../../api/constants.js";
-import {getListings} from "../../api/listing/read.js";
+import {getPets} from "../../api/pet/read.js";
 import {deletePet} from "../../api/admin/delete.js";
 import {setEditForm} from "../admin/create-edit.js";
 import {updatePet} from "../../api/admin/update.js";
@@ -78,7 +78,7 @@ export function renderPetTemplate( pet, mode = "card" ) {
     if (detailsBtn) {
         detailsBtn.addEventListener("click", () => {
             if (pet.id) {
-                window.location.href = `/listing/?id=${pet.id}`;
+                window.location.href = `/pet/?id=${pet.id}`;
             }
         });
     }
@@ -141,13 +141,13 @@ export function renderPetTemplate( pet, mode = "card" ) {
 
                 try {
                     await deletePet(pet.id);
-                    const card = document.getElementById(`listing-${pet.id}`);
+                    const card = document.getElementById(`pet-${pet.id}`);
                     if (card) card.remove();
                     alert(`${pet.name} deleted successfully!`);
                     window.location.reload();
                 } catch (error) {
                     console.error("Failed to delete:", error.message);
-                    alert(`Failed to delete listing: ${error.message}`);
+                    alert(`Failed to delete pet: ${error.message}`);
                 }
             });
         }
@@ -199,7 +199,7 @@ export async function renderPetCard(petId = null, searchTerm = "", category = ""
 
     try {
         if (petId) {
-            const response = await getListings(petId);
+            const response = await getPets(petId);
             const pet = response.data;
 
             if (!pet) {
@@ -211,7 +211,7 @@ export async function renderPetCard(petId = null, searchTerm = "", category = ""
             const detailCard = renderPetTemplate(pet, "detail");
             detailContainer.appendChild(detailCard);
         } else {
-            const response = await getListings();
+            const response = await getPets();
             let pets = response.data;
 
             if (!pets) {

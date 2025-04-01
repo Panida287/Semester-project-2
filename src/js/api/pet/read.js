@@ -1,7 +1,7 @@
 import { renderHeaders } from "../headers.js";
 import { API_PETS } from "../constants.js";
 
-export async function getListings(petId = null) {
+export async function getPets(petId = null) {
     const myHeaders = renderHeaders();
     const endpoint = petId ? `${API_PETS}/${petId}` : API_PETS;
 

@@ -1,12 +1,12 @@
-import { renderPetTemplate } from "../listing/display.js";
-import { getListings } from "../../api/listing/read.js";
+import {renderPetTemplate} from "../pet/display.js";
+import {getPets} from "../../api/pet/read.js";
 
-export async function renderPetCardAdmin(searchTerm = "") {
+export async function renderPetCardAdmin( searchTerm = "" ) {
     const cardContainer = document.getElementById("pet-list");
     const loggedInUser = localStorage.getItem("userName");
 
     try {
-        const response = await getListings();
+        const response = await getPets();
         const pets = response.data;
 
         if (!pets || !loggedInUser) {
@@ -21,7 +21,7 @@ export async function renderPetCardAdmin(searchTerm = "") {
             userPets = userPets.filter(pet =>
                 pet.name?.toLowerCase().includes(lowerSearch) ||
                 pet.breed?.toLowerCase().includes(lowerSearch) ||
-                pet.species?.toLowerCase().includes(lowerSearch)
+                pet.species?.toLowerCase().includes(lowerSearch),
             );
         }
 
