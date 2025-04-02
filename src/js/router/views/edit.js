@@ -3,14 +3,24 @@ import {updatePet} from "../../api/pet/update.js";
 import {setupPreview} from "../../utilities/preview.js";
 import {getIdFromUrl} from "../../utilities/getId.js";
 import {authGuard} from "../../utilities/authGaurd.js";
+import {renderFooter} from "../../utilities/footer.js";
+import {mobileNav} from "../../utilities/mobileNav.js";
 
-authGuard(authGuard);
+authGuard();
+renderFooter();
+const isMobile = window.innerWidth <= 480;
+if (isMobile) {
+    mobileNav()
+}
+
 
 const form = document.getElementById("add-edit-form");
 const imageUrlInput = document.getElementById("image-url");
 const imagePreview = document.getElementById("image-preview");
 const errorDiv = document.querySelector(".error-div");
 const cancelBtn = document.querySelector(".cancel-btn");
+const updateHeader = document.querySelector(".update-pet");
+const updatePetImg = document.querySelector(".update-pet-img");
 
 let editingPetId = null;
 let currentPet = null;
@@ -27,6 +37,10 @@ function populatePetForm( pet ) {
     document.getElementById("location").value = pet.location || "";
     document.getElementById("image-url").value = pet.image?.url || "";
     document.getElementById("image-alt").value = pet.image?.alt || "";
+
+    updateHeader.textContent = `Updating ${pet.name}`;
+    updatePetImg.src = pet.image?.url;
+    updatePetImg.alt = pet.name;
 
     const preview = document.getElementById("image-preview");
     if (preview) {

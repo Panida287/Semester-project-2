@@ -1,12 +1,17 @@
 import { renderFooter } from "../../utilities/footer.js";
 import { renderHeader } from "../../utilities/header.js";
 import { renderPetCard } from "../../ui/pet/display.js";
-import { setLogoutListener } from "../../ui/global/logout.js";
 import { setupFilterControls } from "../../utilities/filter.js";
+import {setupFilterButtonState} from "../../utilities/setupFilterButtonState.js";
+import {mobileNav} from "../../utilities/mobileNav.js";
 
 renderHeader();
 renderFooter();
-setLogoutListener();
+const isMobile = window.innerWidth <= 480;
+if (isMobile) {
+    mobileNav()
+}
+
 
 setupFilterControls({
     searchInputId: "searchInput",
@@ -16,3 +21,5 @@ setupFilterControls({
     allBtnId: "all-btn",
     renderFn: renderPetCard,
 });
+
+setupFilterButtonState()
