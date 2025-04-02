@@ -1,11 +1,11 @@
-import { loggedInHeaders } from "../headers";
+import { loggedInHeaders } from "../headers.js";
 import {API_PETS} from "../constants.js";
 
 /**
- * Deletes a listing by its ID.
+ * Deletes a pet by its ID.
  *
  * @async
- * @param {string} id - The ID of the listing to delete.
+ * @param {string} id - The ID of the pet to delete.
  * @returns {Promise<void | Object>} Resolves with no content if deletion is successful, or optional response data.
  * @throws {Error} Throws an error if the deletion request fails.
  */
@@ -19,7 +19,7 @@ export async function deletePet(id) {
         });
 
         if (!response.ok) {
-            let message = "Failed to delete listing.";
+            let message = "Failed to delete pet.";
 
             const contentType = response.headers.get("content-type");
             if (contentType && contentType.includes("application/json")) {
@@ -30,6 +30,6 @@ export async function deletePet(id) {
         }
 
     } catch (error) {
-        throw new Error(error.message || "An unexpected error occurred while deleting the listing.");
+        throw new Error(error.message || "An unexpected error occurred while deleting the pet.");
     }
 }

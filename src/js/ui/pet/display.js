@@ -1,8 +1,7 @@
 import {FALLBACK_IMG, FALLBACK_AVATAR} from "../../api/constants.js";
-import {getListings} from "../../api/listing/read.js";
-import {deletePet} from "../../api/admin/delete.js";
-import {setEditForm} from "../admin/create-edit.js";
-import {updatePet} from "../../api/admin/update.js";
+import {getPets} from "../../api/pet/read.js";
+import {deletePet} from "../../api/pet/delete.js";
+import {updatePet} from "../../api/pet/update.js";
 
 export function renderPetTemplate( pet, mode = "card" ) {
     const templateId = mode === "detail"
@@ -77,9 +76,7 @@ export function renderPetTemplate( pet, mode = "card" ) {
     const detailsBtn = clone.querySelector(".pet-details-btn");
     if (detailsBtn) {
         detailsBtn.addEventListener("click", () => {
-            if (pet.id) {
-                window.location.href = `/listing/?id=${pet.id}`;
-            }
+            window.location.href = `/pet/?id=${pet.id}`;
         });
     }
 
@@ -129,7 +126,8 @@ export function renderPetTemplate( pet, mode = "card" ) {
         const editBtn = clone.querySelector(".edit-btn");
         if (editBtn) {
             editBtn.addEventListener("click", () => {
-                setEditForm(pet);
+                window.location.href = `/pet/edit/?id=${pet.id}`;
+
             });
         }
 
@@ -141,13 +139,13 @@ export function renderPetTemplate( pet, mode = "card" ) {
 
                 try {
                     await deletePet(pet.id);
-                    const card = document.getElementById(`listing-${pet.id}`);
+                    const card = document.getElementById(`pet-${pet.id}`);
                     if (card) card.remove();
                     alert(`${pet.name} deleted successfully!`);
                     window.location.reload();
                 } catch (error) {
                     console.error("Failed to delete:", error.message);
-                    alert(`Failed to delete listing: ${error.message}`);
+                    alert(`Failed to delete pet: ${error.message}`);
                 }
             });
         }
@@ -193,13 +191,13 @@ export function renderPetTemplate( pet, mode = "card" ) {
     return clone;
 }
 
-export async function renderPetCard(petId = null, searchTerm = "", category = "") {
+export async function renderPetCard( petId = null, searchTerm = "", category = "" ) {
     const cardContainer = document.getElementById("pet-card-container");
     const detailContainer = document.getElementById("pet-details");
 
     try {
         if (petId) {
-            const response = await getListings(petId);
+            const response = await getPets(petId);
             const pet = response.data;
 
             if (!pet) {
@@ -211,7 +209,7 @@ export async function renderPetCard(petId = null, searchTerm = "", category = ""
             const detailCard = renderPetTemplate(pet, "detail");
             detailContainer.appendChild(detailCard);
         } else {
-            const response = await getListings();
+            const response = await getPets();
             let pets = response.data;
 
             if (!pets) {
@@ -224,7 +222,7 @@ export async function renderPetCard(petId = null, searchTerm = "", category = ""
                 pets = pets.filter(pet =>
                     pet.name?.toLowerCase().includes(lowerSearch) ||
                     pet.breed?.toLowerCase().includes(lowerSearch) ||
-                    pet.species?.toLowerCase().includes(lowerSearch)
+                    pet.species?.toLowerCase().includes(lowerSearch),
                 );
             }
 
@@ -236,7 +234,7 @@ export async function renderPetCard(petId = null, searchTerm = "", category = ""
                     });
                 } else {
                     pets = pets.filter(pet =>
-                        pet.species?.toLowerCase() === category.toLowerCase()
+                        pet.species?.toLowerCase() === category.toLowerCase(),
                     );
                 }
             }

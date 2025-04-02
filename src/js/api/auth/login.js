@@ -31,7 +31,7 @@ export async function login({ email, password }) {
 
         if (result.data?.accessToken) {
             localStorage.setItem("accessToken", result.data.accessToken);
-            localStorage.setItem("userName", result.data.name);
+            localStorage.setItem("petPalUserName", result.data.name);
         }
 
         return result;

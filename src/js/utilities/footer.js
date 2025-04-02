@@ -14,7 +14,7 @@ export function renderFooter() {
         <a href="/" class="${path === "/" || path === "/index.html" ? activeClass : inactiveClass} text-xl">
           <i class="fas fa-home"></i>
         </a>
-        <a href="/listing" class="${path.includes("listing") ? activeClass : inactiveClass} text-xl">
+        <a href="/pet" class="${path.includes("pet") ? activeClass : inactiveClass} text-xl">
           <i class="fa-solid fa-paw"></i>
         </a>
         <a href="#" class="${path.includes("favourite") ? activeClass : inactiveClass} text-xl">

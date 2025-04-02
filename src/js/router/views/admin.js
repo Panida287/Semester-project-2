@@ -1,11 +1,15 @@
 import { renderPetCardAdmin } from "../../ui/admin/display.js";
-import { setupCreatePet } from "../../ui/admin/create-edit.js";
+import { setupFilterControls } from "../../utilities/filter.js";
 
-setupCreatePet();
-renderPetCardAdmin();
+document.getElementById("add-btn")?.addEventListener("click", () => {
+    window.location.href = "/pet/create/";
+});
 
-const searchInput = document.getElementById("searchInput");
-searchInput.addEventListener("input", (e) => {
-    const value = e.target.value;
-    renderPetCardAdmin(value);
+setupFilterControls({
+    searchInputId: "searchInput",
+    catBtnId: "cats-btn",
+    dogBtnId: "dogs-btn",
+    otherBtnId: "others-btn",
+    allBtnId: "all-btn",
+    renderFn: renderPetCardAdmin,
 });
