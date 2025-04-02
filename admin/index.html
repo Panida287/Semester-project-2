@@ -3,95 +3,110 @@
 <head>
     <meta charset="UTF-8" />
     <meta property="og:image" content="assets/favicon_io/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="180x180" href="public/assets/favicon_io/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="public/assets/favicon_io/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="public/assets/favicon_io/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="180x180" href="/public/assets/favicon_io/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/favicon_io/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/assets/favicon_io/favicon-16x16.png" />
     <link rel="stylesheet" href="../src/css/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="../src/js/main.js"></script>
     <script src="https://kit.fontawesome.com/23a7bf8149.js" crossorigin="anonymous"></script>
     <title>Admin</title>
 </head>
+
 <body>
-<header class="flex items-center justify-between px-6 py-4 bg-white shadow">
-    <h1 class="text-xl font-bold text-gray-800">🐾 Pet Admin</h1>
-    <button class="logout-btn button bg-primary">Logout</button>
+<header class="flex w-full px-6 py-4 bg-white shadow">
+    <div class="w-full max-w-screen-lg mx-auto flex items-center justify-between">
+        <h1 class="text-xl font-bold text-gray-800 w-full">🐾 Pet Admin</h1>
+        <button class="logout-btn button bg-primary text-accent">Logout</button>
+    </div>
 </header>
 
-<section class="px-6 py-4 bg-white border-b border-gray-100 space-y-3">
-    <label for="searchInput" class="block text-sm font-medium text-gray-700">Filter</label>
-    <input
-        type="text"
-        id="searchInput"
-        placeholder="Search pets..."
-        class="w-full px-4 py-2 border rounded-md focus:ring-indigo-500 focus:border-indigo-500 border-gray-300"
-    />
-    <div class="flex flex-wrap gap-2 pt-2">
-        <button id="all-btn" class="filter-btn px-4 py-1 rounded-full bg-primary text-text text-sm hover:bg-orange-400">
-            All
-        </button>
-        <button id="dogs-btn"
-                class="filter-btn px-4 py-1 rounded-full bg-primary text-text text-sm hover:bg-orange-400">Dogs
-        </button>
-        <button id="cats-btn"
-                class="filter-btn px-4 py-1 rounded-full bg-primary text-text text-sm hover:bg-orange-400">Cats
-        </button>
-        <button id="others-btn"
-                class="filter-btn px-4 py-1 rounded-full bg-primary text-text text-sm hover:bg-orange-400">Others
-        </button>
-    </div>
+<main class="grid">
+    <section class="px-6 py-4 bg-white border-b border-gray-100 space-y-3">
+        <div class="w-full max-w-screen-lg mx-auto">
+            <label for="searchInput" class="block text-sm font-medium text-gray-700">Filter</label>
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search pets..."
+                class="w-full px-4 py-2 border rounded-md border-gray-300"
+            />
+            <div class="flex flex-wrap gap-2 pt-2">
+                <button id="all-btn"
+                        class="filter-btn px-4 py-1 rounded-full bg-primary text-text text-sm hover:bg-orange-400">
+                    All
+                </button>
+                <button id="dogs-btn"
+                        class="filter-btn px-4 py-1 rounded-full bg-primary text-text text-sm hover:bg-orange-400">Dogs
+                </button>
+                <button id="cats-btn"
+                        class="filter-btn px-4 py-1 rounded-full bg-primary text-text text-sm hover:bg-orange-400">Cats
+                </button>
+                <button id="others-btn"
+                        class="filter-btn px-4 py-1 rounded-full bg-primary text-text text-sm hover:bg-orange-400">
+                    Others
+                </button>
+            </div>
 
-</section>
+        </div>
+    </section>
 
-<main class="h-full grid max-w-4xl mx-auto">
-    <div class="flex justify-end items-center mt-4">
-        <button id="add-btn"
-                class="px-4 py-2 place-items-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-md">
-            + Add Pet
-        </button>
-    </div>
-    <div id="pet-list"
-         class="grid p-6">
+    <div class="h-full grid max-w-4xl mx-auto">
+        <div class="flex justify-end items-center my-4">
+            <button id="add-btn"
+                    class="button bg-primary mx-4 text-accent">
+                + Add Pet
+            </button>
+        </div>
+        <div id="pet-list"
+             class="grid p-6 pt-0 place-items-center flex-grow max-w-4xl mx-auto">
+        </div>
     </div>
 </main>
+<footer></footer>
 
 <template id="pet-card-admin">
-    <div class="w-full flex bg-white p-4 m-4 rounded-xl shadow relative">
-        <button class="pet-details-btn">
-            <img class="w-40 h-40 object-cover pet-img" src="../public/assets/images/fallback-image.png"
-                 alt="Pet Image" />
-        </button>
-        <div class="pet-info p-4 flex flex-col justify-between">
-            <h3 class="text-lg font-semibold text-gray-800 pet-name">Max</h3>
-            <p class="text-sm text-gray-500 pet-breed">Golden Retriever • 2 years old</p>
-            <div class="flex pet-tags">
-                <div class="relative flex justify-center items-center gap-3 text-left">
-                    <button type="button"
-                            title="Click to change status"
-                            class="status-btn flex items-center gap-0.5">
-                        <span class="pet-adoptionStatus px-2 py-1 rounded-full text-xs font-medium">Available</span>
-                        <span class="text-xl"><i class="fa-light fa-square-caret-down"></i></span>
-                    </button>
-                    <div
-                        class="status-menu hidden overflow-visible absolute -translate-x-6 translate-y-14 z-50 mt-1 bg-white border border-gray-200 rounded shadow">
-                        <button class="status-option block w-full px-4 py-1 text-sm text-left hover:bg-gray-100"
-                                data-value="available">Available
+    <div class="w-full flex bg-white p-4 m-4 mt-0 rounded-xl shadow relative md:m-0 md:rounded-none md:shadow-none md:border-b">
+        <div class="flex w-full">
+            <button class="pet-details-btn">
+                <img class="w-40 h-40 object-cover pet-img md:h-20 md:w-20"
+                     src="../public/assets/images/fallback-image.png"
+                     alt="Pet Image" />
+            </button>
+            <div class="pet-info p-4 flex flex-col justify-between md:flex-row md:items-center md:gap-6">
+                <h3 class="text-lg font-semibold text-gray-800 pet-name">Max</h3>
+                <p class="text-sm text-gray-500 pet-breed">Golden Retriever</p>
+                <p class="text-sm text-gray-500 pet-age"></p>
+                <div class="flex pet-tags">
+                    <div class="relative flex justify-center items-center gap-3 text-left">
+                        <button type="button"
+                                title="Click to change status"
+                                class="status-btn flex items-center gap-0.5">
+                            <span class="pet-adoptionStatus px-2 py-1 rounded-full text-xs font-medium">Available</span>
+                            <span class="text-xl"><i class="fa-light fa-square-caret-down"></i></span>
                         </button>
-                        <button class="status-option block w-full px-4 py-1 text-sm text-left hover:bg-gray-100"
-                                data-value="adopted">Adopted
-                        </button>
-                        <button class="status-option block w-full px-4 py-1 text-sm text-left hover:bg-gray-100"
-                                data-value="pending">Pending
-                        </button>
+                        <div
+                            class="status-menu hidden overflow-visible absolute -translate-x-6 translate-y-14 z-50 mt-1 bg-white border border-gray-200 rounded shadow">
+                            <button class="status-option block w-full px-4 py-1 text-sm text-left hover:bg-gray-100"
+                                    data-value="available">Available
+                            </button>
+                            <button class="status-option block w-full px-4 py-1 text-sm text-left hover:bg-gray-100"
+                                    data-value="adopted">Adopted
+                            </button>
+                            <button class="status-option block w-full px-4 py-1 text-sm text-left hover:bg-gray-100"
+                                    data-value="pending">Pending
+                            </button>
+                        </div>
+                        <span
+                            class="pet-gender px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800"></span>
                     </div>
-                    <span
-                        class="pet-gender px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800"></span>
+
+
                 </div>
-
-
             </div>
+
         </div>
-        <div class="absolute top-2 right-2 flex gap-4 mr-2 card-actions">
+        <div class="flex justify-end items-start gap-4 card-actions md:items-center">
             <button class="edit-btn text-gray-600 hover:text-indigo-600">
                 <i class="fa-solid fa-pen-to-square"></i>
             </button>
@@ -102,6 +117,7 @@
 
     </div>
 </template>
+
 
 </body>
 </html>

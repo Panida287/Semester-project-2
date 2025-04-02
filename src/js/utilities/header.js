@@ -7,7 +7,7 @@ export function renderHeader() {
     const inactiveClass = "text-black";
 
     header.innerHTML = `
-      <div class="flex justify-between items-center p-4 bg-accent shadow-lg">
+      <div class="w-full max-w-screen-lg flex justify-between items-center p-4">
         <a href="/" class="text-2xl font-bold text-primary">🐾 PetPal</a>
         <nav class="flex gap-8 text-lg items-center">
           <a href="/account/login/" class="login-btn button bg-primary ${path.includes("login") ? activeClass : inactiveClass} hover:underline">Login</a>
