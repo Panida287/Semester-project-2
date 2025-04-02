@@ -8,10 +8,7 @@ import {mobileNav} from "../../utilities/mobileNav.js";
 
 authGuard();
 renderFooter();
-const isMobile = window.innerWidth <= 480;
-if (isMobile) {
-    mobileNav()
-}
+mobileNav();
 
 
 const form = document.getElementById("add-edit-form");

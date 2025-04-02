@@ -9,11 +9,7 @@ import {mobileNav} from "../../utilities/mobileNav.js";
 authGuard(authGuard);
 renderFooter()
 setLogoutListener();
-
-const isMobile = window.innerWidth <= 480;
-if (isMobile) {
-    mobileNav()
-}
+mobileNav()
 
 document.getElementById("add-btn")?.addEventListener("click", () => {
     window.location.href = "/pet/create/";
