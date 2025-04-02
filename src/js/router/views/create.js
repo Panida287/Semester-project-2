@@ -6,11 +6,7 @@ import {mobileNav} from "../../utilities/mobileNav.js";
 
 authGuard(authGuard);
 renderFooter();
-
-const isMobile = window.innerWidth <= 480;
-if (isMobile) {
-    mobileNav()
-}
+mobileNav()
 
 const form = document.getElementById("create-form");
 const imageUrlInput = document.getElementById("image-url");
