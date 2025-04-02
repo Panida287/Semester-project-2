@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta property="og:image" content="assets/favicon_io/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="180x180" href="/public/assets/favicon_io/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/favicon_io/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/assets/favicon_io/favicon-16x16.png" />
+    <link rel="stylesheet" href="../../src/css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="../../src/js/main.js"></script>
+    <script src="https://kit.fontawesome.com/23a7bf8149.js" crossorigin="anonymous"></script>
+    <title>Add New Pet</title>
+</head>
+<body>
+<header class="flex items-center justify-between px-6 py-4 bg-white shadow">
+    <div class="w-full max-w-screen-lg mx-auto flex items-center justify-between">
+        <a href="/admin/" class="text-xl font-bold text-gray-800 w-full">🐾 Pet Admin</a>
+        <button class="logout-btn button bg-primary text-accent">Logout</button>
+    </div>
+</header>
+
+<main>
+    <div class="flex flex-col items-center justify-center min-h-full p-4">
+        <h1 class="m-5 font-extrabold text-primary text-xl">Add new pet</h1>
+        <form id="create-form" class="bg-white w-full max-w-4xl rounded-xl shadow-lg mb-10">
+            <div class="p-6 space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="name" class="text-sm font-semibold mb-2">Name</label>
+                        <input id="name" type="text" placeholder="Enter pet name"
+                               class="w-full border rounded-md px-3 py-2 mb-3" required />
+
+                        <label for="breed" class="text-sm font-semibold mb-2">Breed</label>
+                        <input id="breed" type="text" placeholder="Enter breed"
+                               class="w-full border rounded-md px-3 py-2 mb-3" required />
+
+                        <label for="size" class="text-sm font-semibold mb-2">Size</label>
+                        <select id="size" class="w-full border rounded-md px-3 py-2 mb-3" required>
+                            <option>Select size</option>
+                            <option>Small</option>
+                            <option>Medium</option>
+                            <option>Large</option>
+                        </select>
+
+                        <label for="description" class="text-sm font-semibold mb-2">Description</label>
+                        <textarea id="description" placeholder="Describe your pet"
+                                  class="w-full border rounded-md px-3 py-2 h-20 resize-none"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="species" class="text-sm font-semibold mb-2">Species</label>
+                        <select id="species" class="w-full border rounded-md px-3 py-2 mb-3" required>
+                            <option>Select species</option>
+                            <option>Dog</option>
+                            <option>Cat</option>
+                            <option>Bird</option>
+                            <option>Other</option>
+                        </select>
+
+                        <h3 class="text-sm font-semibold mb-2">Gender</h3>
+                        <div class="flex items-center space-x-4 mb-3">
+                            <label><input type="radio" name="gender" value="male" class="mr-1" /> Male</label>
+                            <label><input type="radio" name="gender" value="female" class="mr-1" /> Female</label>
+                            <label><input type="radio" name="gender" value="unknown" class="mr-1" /> Unknown</label>
+                        </div>
+
+                        <label for="color" class="text-sm font-semibold mb-2">Color</label>
+                        <input id="color" type="text" placeholder="Enter color"
+                               class="w-full border rounded-md px-3 py-2 mb-3" required />
+
+                        <label for="age" class="text-sm font-semibold mb-2">Age</label>
+                        <div class="flex gap-3 items-center mb-3">
+                            <input id="age" type="number" placeholder="Enter age"
+                                   class="w-32 border rounded-md px-3 py-2" required />
+                            <p>Years</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="location" class="text-sm font-semibold mb-2">Location</label>
+                    <input id="location" type="text" placeholder="Enter location"
+                           class="w-full border rounded-md px-3 py-2 mb-3" required />
+                </div>
+
+                <div>
+                    <label for="image-url" class="text-sm font-semibold mb-2">Pet Image</label>
+                    <input id="image-url" type="url" placeholder="Enter image URL"
+                           class="w-full border rounded-md px-3 py-2 mb-3" required />
+
+                    <div class="mt-4">
+                        <img id="image-preview"
+                             src=""
+                             alt="Preview of the item image"
+                             class="hidden  max-h-96 justify-self-center object-contain border border-gray-300 rounded-md" />
+                    </div>
+
+                    <label for="image-alt" class="text-sm font-semibold mb-2">Image Alt Text</label>
+                    <textarea id="image-alt" placeholder="Describe the image for accessibility"
+                              class="w-full border rounded-md px-3 py-2 h-20 resize-none"></textarea>
+                </div>
+            </div>
+
+            <h3 class="error-div"></h3>
+
+            <div class="flex justify-between items-center px-6 py-4 border-t">
+                <button type="button" class="cancel-btn text-gray-500 hover:text-black">Cancel</button>
+                <button type="submit" class="button bg-primary hover:bg-orange-400 text-white">
+                    Save Pet
+                </button>
+            </div>
+        </form>
+
+    </div>
+</main>
+
+<footer></footer>
+
+</body>
+</html>
