@@ -7,6 +7,6 @@
  */
 export function onLogout() {
     localStorage.removeItem("accessToken");
-    localStorage.removeItem("userName");
+    localStorage.removeItem("petPalUserName");
     window.location.href = "/";
 }

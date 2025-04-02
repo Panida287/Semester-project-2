@@ -12,9 +12,7 @@
 <body>
 <header class="flex items-center justify-between px-6 py-4 bg-white shadow">
     <h1 class="text-xl font-bold text-gray-800">🐾 Pet Admin</h1>
-    <button id="add-btn" class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md">
-        + Add Pet
-    </button>
+    <button class="logout-btn button bg-primary">Logout</button>
 </header>
 
 <section class="px-6 py-4 bg-white border-b border-gray-100 space-y-3">
@@ -36,14 +34,19 @@
     </div>
 </section>
 
-<main class="h-full w-full">
+<main class="h-full grid max-w-4xl mx-auto">
+    <div class="flex justify-end items-center mt-4" >
+        <button id="add-btn" class="px-4 py-2 place-items-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-md">
+            + Add Pet
+        </button>
+    </div>
     <div id="pet-list"
-         class="grid p-6 max-w-screen-xl mx-auto lg:grid-cols-2 xl:grid-cols-3">
+         class="grid p-6">
     </div>
 </main>
 
 <template id="pet-card-admin">
-    <div class="max-w-lg flex bg-white p-4 m-4 rounded-xl shadow relative">
+    <div class="w-full flex bg-white p-4 m-4 rounded-xl shadow relative">
         <button class="pet-details-btn">
             <img class="w-40 h-40 object-cover pet-img" src="../assets/images/fallback-image.png" alt="Pet Image" />
         </button>

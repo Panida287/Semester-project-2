@@ -1,16 +1,11 @@
 export function checkIfLoggedIn(callback) {
-    const userName = localStorage.getItem("petPalUserName");
+    const username = localStorage.getItem("petPalUserName");
 
-    if (userName) {
-        console.log("User is logged in as:", userName);
-
-        if (typeof callback === "function") {
-            callback(userName);
-        }
-
-        return userName;
+    if (username && typeof callback === "function") {
+        callback(username);
     } else {
-        console.warn("User not logged in.");
-        return null;
+        if (typeof callback === "function") {
+            callback(null);
+        }
     }
 }

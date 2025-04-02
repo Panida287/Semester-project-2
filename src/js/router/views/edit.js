@@ -1,7 +1,10 @@
-import { getPets } from "../../api/pet/read.js";
-import { updatePet } from "../../api/pet/update.js";
-import { setupPreview } from "../../utilities/preview.js";
-import { getIdFromUrl } from "../../utilities/getId.js";
+import {getPets} from "../../api/pet/read.js";
+import {updatePet} from "../../api/pet/update.js";
+import {setupPreview} from "../../utilities/preview.js";
+import {getIdFromUrl} from "../../utilities/getId.js";
+import {authGuard} from "../../utilities/authGaurd.js";
+
+authGuard(authGuard);
 
 const form = document.getElementById("add-edit-form");
 const imageUrlInput = document.getElementById("image-url");
@@ -12,7 +15,7 @@ const cancelBtn = document.querySelector(".cancel-btn");
 let editingPetId = null;
 let currentPet = null;
 
-function populatePetForm(pet) {
+function populatePetForm( pet ) {
     document.getElementById("name").value = pet.name || "";
     document.getElementById("species").value = pet.species || "";
     document.getElementById("breed").value = pet.breed || "";
@@ -49,7 +52,7 @@ async function initEditPage() {
     }
 }
 
-form?.addEventListener("submit", async (e) => {
+form?.addEventListener("submit", async ( e ) => {
     e.preventDefault();
 
     const formData = {
@@ -69,7 +72,10 @@ form?.addEventListener("submit", async (e) => {
     };
 
     try {
-        await updatePet({ ...formData, id: editingPetId });
+        await updatePet({
+            ...formData,
+            id: editingPetId,
+        });
         alert("Pet updated successfully!");
         window.location.href = `/pet/?id=${editingPetId}`;
     } catch (error) {
