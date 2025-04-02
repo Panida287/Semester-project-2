@@ -3,7 +3,7 @@ import {getPets} from "../../api/pet/read.js";
 
 export async function renderPetCardAdmin(petId = null, searchTerm = "", category = "") {
     const cardContainer = document.getElementById("pet-list");
-    const loggedInUser = localStorage.getItem("userName");
+    const loggedInUser = localStorage.getItem("petPalUserName");
 
     try {
         const response = await getPets();
@@ -54,5 +54,7 @@ export async function renderPetCardAdmin(petId = null, searchTerm = "", category
         cardContainer.innerHTML = `<h1>${error.message}</h1>`;
     }
 }
+
+
 
 

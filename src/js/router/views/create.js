@@ -1,5 +1,8 @@
 import {createPet} from "../../api/pet/create.js";
 import {setupPreview} from "../../utilities/preview.js";
+import {authGuard} from "../../utilities/authGaurd.js";
+
+authGuard(authGuard);
 
 const form = document.getElementById("create-form");
 const imageUrlInput = document.getElementById("image-url");
