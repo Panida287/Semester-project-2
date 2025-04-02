@@ -1,12 +1,11 @@
 import { renderFooter } from "../../utilities/footer.js";
 import { renderHeader } from "../../utilities/header.js";
 import { renderPetCard } from "../../ui/pet/display.js";
-import { setLogoutListener } from "../../ui/global/logout.js";
 import { setupFilterControls } from "../../utilities/filter.js";
+import {setupFilterButtonState} from "../../utilities/setupFilterButtonState.js";
 
 renderHeader();
 renderFooter();
-setLogoutListener();
 
 setupFilterControls({
     searchInputId: "searchInput",
@@ -16,3 +15,5 @@ setupFilterControls({
     allBtnId: "all-btn",
     renderFn: renderPetCard,
 });
+
+setupFilterButtonState()
