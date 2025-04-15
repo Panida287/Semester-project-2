@@ -28,7 +28,6 @@ main {
     border-radius: 50rem;
     font-family: 'Poppins', sans-serif;
     transition: all;
-    color: white;
 }
 
 .button:hover {

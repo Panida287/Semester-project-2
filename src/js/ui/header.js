@@ -7,7 +7,7 @@ export function renderHeader() {
     const inactiveClass = 'text-black';
     
     header.innerHTML = `
-      <div class="w-full max-w-screen-lg flex justify-between items-center p-4">
+      <div class="w-full max-w-screen-xl flex justify-between items-center p-4">
         <a href="/public" class="text-2xl font-bold text-primary">🐾 PetPal</a>
         <nav class="flex gap-8 text-lg items-center">
           <a href="/admin/" class="admin-btn button border border-primary text-text space-x-2 hover:bg-primary">
