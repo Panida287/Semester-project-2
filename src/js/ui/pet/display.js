@@ -195,6 +195,7 @@ export function renderPetTemplate( pet, mode = "card" ) {
 export async function renderPetCard(petId = null, searchTerm = "", category = "", page = 1) {
     const cardContainer = document.getElementById("pet-card-container");
     const detailContainer = document.getElementById("pet-details");
+    const paginationContainer = document.getElementById("pagination-container");
 
     try {
         if (petId) {
@@ -210,13 +211,39 @@ export async function renderPetCard(petId = null, searchTerm = "", category = ""
             const detailCard = renderPetTemplate(pet, "detail");
             detailContainer.appendChild(detailCard);
         } else {
-            // Fetch pets with pagination
-            const response = await getPets({ page });
+            const isFiltered = searchTerm.trim() || (category && category !== "all");
+
+            // When not filtered, fetch paginated data from API
+            const response = await getPets(isFiltered ? {} : { page });
             let pets = response.data;
             const meta = response.meta;
 
+            // If filtered, apply search + category filtering manually
+            if (isFiltered) {
+                if (searchTerm.trim()) {
+                    const search = searchTerm.toLowerCase();
+                    pets = pets.filter(pet =>
+                        pet.name?.toLowerCase().includes(search) ||
+                        pet.breed?.toLowerCase().includes(search) ||
+                        pet.species?.toLowerCase().includes(search)
+                    );
+                }
+
+                if (category === "other") {
+                    pets = pets.filter(pet => {
+                        const species = pet.species?.toLowerCase();
+                        return species !== "cat" && species !== "dog";
+                    });
+                } else if (category && category !== "all") {
+                    pets = pets.filter(pet =>
+                        pet.species?.toLowerCase() === category.toLowerCase()
+                    );
+                }
+            }
+
             if (!pets || pets.length === 0) {
-                cardContainer.innerHTML = `<h1>No pets found.</h1>`;
+                cardContainer.innerHTML = `<h1>No pets match your filter.</h1>`;
+                paginationContainer.innerHTML = "";
                 return;
             }
 
@@ -226,20 +253,19 @@ export async function renderPetCard(petId = null, searchTerm = "", category = ""
                 cardContainer.appendChild(card);
             });
 
-            // Only render pagination when there's no filter
-            renderPagination(meta, (newPage) => {
-                renderPetCard(null, "", "", newPage); // reset filters
-            });
+            if (!isFiltered) {
+                renderPagination(meta, (newPage) => {
+                    renderPetCard(null, "", "", newPage);
+                });
+            } else {
+                paginationContainer.innerHTML = ""; // Clear pagination if filtered
+            }
         }
     } catch (error) {
         console.error("Fetch failed:", error);
-        const fallbackMessage = `<h1>Failed to Load. Please try again later</h1>`;
-
-        if (petId) {
-            detailContainer.innerHTML = fallbackMessage;
-        } else {
-            cardContainer.innerHTML = fallbackMessage;
-        }
+        const fallback = `<h1>Failed to Load. Please try again later</h1>`;
+        (petId ? detailContainer : cardContainer).innerHTML = fallback;
     }
 }
+
 
