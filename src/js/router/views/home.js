@@ -1,12 +1,11 @@
-import {renderFooter} from "../../ui/footer.js";
-import {renderHeader} from "../../ui/header.js";
+import { renderFooter } from '../../ui/footer.js';
+import { renderHeader } from '../../ui/header.js';
 import {renderPetCard} from "../../ui/pet/display.js";
 import {setupFilterControls} from "../../utilities/filter.js";
 import {setupFilterButtonState} from "../../utilities/setupFilterButtonState.js";
 
 renderHeader();
 renderFooter();
-
 
 setupFilterControls({
     searchInputId: "searchInput",

@@ -2,6 +2,7 @@ import {FALLBACK_IMG, FALLBACK_AVATAR} from "../../api/constants.js";
 import {getPets} from "../../api/pet/read.js";
 import {deletePet} from "../../api/pet/delete.js";
 import {updatePet} from "../../api/pet/update.js";
+import { renderPagination } from '../../utilities/renderPagination.js';
 
 export function renderPetTemplate( pet, mode = "card" ) {
     const templateId = mode === "detail"
@@ -191,13 +192,13 @@ export function renderPetTemplate( pet, mode = "card" ) {
     return clone;
 }
 
-export async function renderPetCard( petId = null, searchTerm = "", category = "" ) {
+export async function renderPetCard(petId = null, searchTerm = "", category = "", page = 1) {
     const cardContainer = document.getElementById("pet-card-container");
     const detailContainer = document.getElementById("pet-details");
 
     try {
         if (petId) {
-            const response = await getPets(petId);
+            const response = await getPets({ petId });
             const pet = response.data;
 
             if (!pet) {
@@ -209,38 +210,13 @@ export async function renderPetCard( petId = null, searchTerm = "", category = "
             const detailCard = renderPetTemplate(pet, "detail");
             detailContainer.appendChild(detailCard);
         } else {
-            const response = await getPets();
+            // Fetch pets with pagination
+            const response = await getPets({ page });
             let pets = response.data;
+            const meta = response.meta;
 
-            if (!pets) {
-                cardContainer.innerHTML = `<h1>No pet found</h1>`;
-                return;
-            }
-
-            if (searchTerm.trim()) {
-                const lowerSearch = searchTerm.toLowerCase();
-                pets = pets.filter(pet =>
-                    pet.name?.toLowerCase().includes(lowerSearch) ||
-                    pet.breed?.toLowerCase().includes(lowerSearch) ||
-                    pet.species?.toLowerCase().includes(lowerSearch),
-                );
-            }
-
-            if (category && category !== "all") {
-                if (category === "other") {
-                    pets = pets.filter(pet => {
-                        const species = pet.species?.toLowerCase();
-                        return species !== "cat" && species !== "dog";
-                    });
-                } else {
-                    pets = pets.filter(pet =>
-                        pet.species?.toLowerCase() === category.toLowerCase(),
-                    );
-                }
-            }
-
-            if (pets.length === 0) {
-                cardContainer.innerHTML = `<h1>No pets match your filter.</h1>`;
+            if (!pets || pets.length === 0) {
+                cardContainer.innerHTML = `<h1>No pets found.</h1>`;
                 return;
             }
 
@@ -248,6 +224,11 @@ export async function renderPetCard( petId = null, searchTerm = "", category = "
             pets.forEach(pet => {
                 const card = renderPetTemplate(pet, "card");
                 cardContainer.appendChild(card);
+            });
+
+            // Only render pagination when there's no filter
+            renderPagination(meta, (newPage) => {
+                renderPetCard(null, "", "", newPage); // reset filters
             });
         }
     } catch (error) {
@@ -261,11 +242,4 @@ export async function renderPetCard( petId = null, searchTerm = "", category = "
         }
     }
 }
-
-
-
-
-
-
-
 
