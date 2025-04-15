@@ -3,12 +3,10 @@ import {updatePet} from "../../api/pet/update.js";
 import {setupPreview} from "../../utilities/preview.js";
 import {getIdFromUrl} from "../../utilities/getId.js";
 import {authGuard} from "../../utilities/authGaurd.js";
-import {renderFooter} from "../../utilities/footer.js";
-import {mobileNav} from "../../utilities/mobileNav.js";
+import {renderFooter} from "../../ui/footer.js";
 
 authGuard();
 renderFooter();
-mobileNav();
 
 
 const form = document.getElementById("add-edit-form");

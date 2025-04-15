@@ -1,12 +1,10 @@
 import {createPet} from "../../api/pet/create.js";
 import {setupPreview} from "../../utilities/preview.js";
 import {authGuard} from "../../utilities/authGaurd.js";
-import {renderFooter} from "../../utilities/footer.js";
-import {mobileNav} from "../../utilities/mobileNav.js";
+import {renderFooter} from "../../ui/footer.js";
 
 authGuard(authGuard);
 renderFooter();
-mobileNav()
 
 const form = document.getElementById("create-form");
 const imageUrlInput = document.getElementById("image-url");
