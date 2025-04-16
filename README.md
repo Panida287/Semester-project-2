@@ -1,8 +1,3 @@
-<<<<<<< Updated upstream
-This is part of Noroff FED2 Semester Project 2
-
-development deployment : https://pet-adoption-dev.netlify.app/
-=======
 # 🐾 PetPal – Pet Adoption Platform
 
 Welcome to **PetPal**, a modern and responsive pet adoption web application built as part of **Semester Project 2** for the Noroff Front-End Development course (FED2). This application allows users to explore pets available for adoption and provides administrators with tools to manage listings securely.
