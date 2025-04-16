@@ -8,9 +8,11 @@ import { setupPreview } from "../../utilities/preview.js";
 import { authGuard } from "../../utilities/authGuard.js";
 import { renderFooter } from "../../ui/footer.js";
 import { showInfoModal } from "../../utilities/modal.js";
+import { setLogoutListener } from '../../ui/global/logout.js';
 
 authGuard();
 renderFooter();
+setLogoutListener();
 
 const form = document.getElementById("create-form");
 const imageUrlInput = document.getElementById("image-url");
