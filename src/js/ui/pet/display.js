@@ -199,7 +199,7 @@ export async function renderPetCard(petId = null, searchTerm = "", category = ""
 
     try {
         if (petId) {
-            const response = await getPets({ petId, limit: 12, page: currentPage });
+            const response = await getPets({ petId });
             const pet = response.data;
 
             if (!pet) {
@@ -212,8 +212,8 @@ export async function renderPetCard(petId = null, searchTerm = "", category = ""
             detailContainer.appendChild(detailCard);
         } else {
             const isFiltered = searchTerm.trim() || (category && category !== "all");
-
-            const response = await getPets(isFiltered ? {} : { page });
+            
+            const response = await getPets(isFiltered ? {} : { page, limit: 8 });
             let pets = response.data;
             const meta = response.meta;
 
