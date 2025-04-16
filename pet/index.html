@@ -2,24 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta property="og:image" content="assets/favicon_io/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="View detailed information about a pet available for adoption through Pet Pal." />
+    <meta name="keywords" content="pet adoption, pet details, view pet, Pet Pal" />
+    <meta name="author" content="Pet Pal Team" />
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:title" content="Pet Details | Pet Pal" />
+    <meta property="og:description" content="Find out more about this adoptable pet on Pet Pal." />
+    <meta property="og:image" content="/assets/favicon_io/apple-touch-icon.png" />
+    <meta property="og:url" content="https://yourdomain.com/pet" />
+    <meta property="og:type" content="article" />
+
+    <!-- Icons -->
     <link rel="icon" type="image/png" sizes="180x180" href="/public/assets/favicon_io/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/favicon_io/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/public/assets/favicon_io/favicon-16x16.png" />
+
+    <!-- Styles & Scripts -->
     <link rel="stylesheet" href="../src/css/style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="../src/js/main.js"></script>
+    <script type="module" src="/src/js/main.js"></script>
     <script src="https://kit.fontawesome.com/23a7bf8149.js" crossorigin="anonymous"></script>
-    <title>Pet Details</title>
+
+    <title>Pet Details | Pet Pal</title>
 </head>
+
 <body>
 
-<header id="header"
-        class="w-full flex justify-center bg-accent shadow-lg">
-</header>
-<main id="main">
+<header id="header" class="w-full flex justify-center bg-accent shadow-lg" role="banner" aria-label="Site header"></header>
+
+<main id="main" role="main" aria-label="Pet details page">
     <div id="pet-details"></div>
+    <h3 class="error-div text-red-600 text-sm font-semibold px-6 pb-2 break-words max-w-full" aria-live="polite"></h3>
+
 </main>
+
 <footer></footer>
 
 <template id="pet-details-template">
@@ -27,7 +46,7 @@
         <div class="space-y-4">
             <img
                 src=""
-                alt="Pet photo"
+                alt="Main photo of the pet"
                 class="w-full h-96 object-cover rounded-lg pet-main-img"
             />
 
@@ -66,10 +85,10 @@
 
                     </div>
                     <div class="flex items-center space-x-4">
-                        <button class="favourite-btn text-2xl text-gray-400 hover:text-red-400">
+                        <button class="favourite-btn text-2xl text-gray-400 hover:text-red-400" aria-label="Add to favourites">
                             <i class="fa-regular fa-heart"></i>
                         </button>
-                        <button class="share-btn text-2xl text-gray-400 hover:text-blue-400">
+                        <button class="share-btn text-2xl text-gray-400 hover:text-blue-400" aria-label="Share pet profile">
                             <i class="fa-solid fa-share-from-square"></i>
                         </button>
                     </div>
@@ -94,12 +113,10 @@
                     </div>
                 </div>
 
-                <div>
-                    <h3 class="font-semibold text-lg">About <span class="pet-name">Buddy</span></h3>
-                    <p class="text-sm text-gray-700 mt-1 pet-description">
-                        – About description goes here –
-                    </p>
-                </div>
+                <section aria-labelledby="about-section">
+                    <h3 id="about-section" class="font-semibold text-lg">About <span class="pet-name">Buddy</span></h3>
+                    <p class="text-sm text-gray-700 mt-1 pet-description">...</p>
+                </section>
 
                 <div class="bg-gray-50 border p-4 rounded-xl space-y-2">
                     <h4 class="font-semibold">Adoption Details</h4>
@@ -112,7 +129,7 @@
                 <div class="bg-gray-50 border p-4 rounded-xl space-y-2">
                     <h4 class="font-semibold">Owner</h4>
                     <div class="flex space-x-2 items-center">
-                        <img src="" alt="" class="owner-avatar w-10 h-10 rounded-full object-cover" />
+                        <img src="" alt="Owner profile photo" class="owner-avatar w-10 h-10 rounded-full object-cover" />
                         <p class="owner-name text-sm text-gray-700"></p>
                     </div>
                     <p class="text-sm text-gray-700 owner-bio"></p>

@@ -11,14 +11,14 @@ import { login } from "../../api/auth/login.js";
  */
 export async function onLogin(event) {
     event.preventDefault();
-
+    
     const formData = {
-        email: document.getElementById("email").value,
-        password: document.getElementById("password").value,
+        email: document.getElementById("email").value.trim(),
+        password: document.getElementById("password").value.trim(),
     };
-
+    
     const result = await login(formData);
-
+    
     if (result?.data) {
         window.location.href = "/";
     }

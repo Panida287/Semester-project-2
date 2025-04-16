@@ -1,20 +1,20 @@
-import {onLogout} from "../auth/logout";
+import { onLogout } from "../auth/logout";
+import { showConfirmModal } from '../../utilities/modal.js';
 
 /**
- * Adds click event listeners to all logout buttons.
- *
- * When a logout button is clicked, this function prompts the user for confirmation.
- * If the user confirms, it calls the `onLogout` function to log the user out.
+ * Attaches click listeners to all elements with the `logout-btn` class.
+ * Uses a confirmation modal instead of `confirm()`.
  */
 export function setLogoutListener() {
     const logoutButtons = document.querySelectorAll(".logout-btn");
-
+    
     logoutButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            const confirmation = window.confirm("Are you sure you want to log out?");
-            if (confirmation) {
+        button.addEventListener("click", async () => {
+            const confirmed = await showConfirmModal("Are you sure you want to log out?");
+            if (confirmed) {
                 onLogout();
             }
         });
     });
 }
+

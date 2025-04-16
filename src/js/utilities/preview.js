@@ -7,9 +7,11 @@
  */
 export function setupPreview(imageUrlInput, previewImage, title = "") {
     const updatePreview = () => {
-        if (imageUrlInput.value.trim()) {
-            previewImage.src = imageUrlInput.value.trim();
-            previewImage.alt = name || "Image Preview";
+        const url = imageUrlInput.value.trim();
+        
+        if (url) {
+            previewImage.src = url;
+            previewImage.alt = title || "Image Preview";
             previewImage.classList.remove("hidden");
         } else {
             previewImage.src = "";
@@ -17,8 +19,8 @@ export function setupPreview(imageUrlInput, previewImage, title = "") {
             previewImage.classList.add("hidden");
         }
     };
-
+    
     updatePreview();
-
+    
     imageUrlInput.addEventListener("input", updatePreview);
 }
