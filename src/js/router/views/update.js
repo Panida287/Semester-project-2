@@ -8,7 +8,6 @@ import {renderFooter} from "../../ui/footer.js";
 authGuard();
 renderFooter();
 
-
 const form = document.getElementById("add-edit-form");
 const imageUrlInput = document.getElementById("image-url");
 const imagePreview = document.getElementById("image-preview");
@@ -50,7 +49,7 @@ async function initEditPage() {
     editingPetId = id;
 
     try {
-        const response = await getPets(id);
+        const response = await getPets({ petId: id });
         currentPet = response.data;
         if (!currentPet) throw new Error("Pet not found");
 
