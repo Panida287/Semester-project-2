@@ -52,7 +52,9 @@ export function renderPetTemplate( pet, mode = "card" ) {
             genderEl.textContent = "Female";
             genderEl.classList.add("bg-pink-100", "text-pink-800");
         } else {
-            genderEl.textContent = pet.gender || "Unknown";
+            genderEl.textContent = "Unknown";
+            genderEl.classList.add("bg-gray-100", "text-gray-800");
+            
         }
     }
 
@@ -80,10 +82,8 @@ export function renderPetTemplate( pet, mode = "card" ) {
             window.location.href = `/pet/?id=${pet.id}`;
         });
     }
-
+    
     if (mode === "detail") {
-        clone.querySelector(".pet-meta").textContent = `${pet.breed} • ${pet.gender} • ${pet.age} years old`;
-
         const avatar = clone.querySelector(".owner-avatar");
         if (avatar) {
             avatar.src = pet.owner?.avatar?.url || FALLBACK_AVATAR;
@@ -213,12 +213,10 @@ export async function renderPetCard(petId = null, searchTerm = "", category = ""
         } else {
             const isFiltered = searchTerm.trim() || (category && category !== "all");
 
-            // When not filtered, fetch paginated data from API
             const response = await getPets(isFiltered ? {} : { page });
             let pets = response.data;
             const meta = response.meta;
 
-            // If filtered, apply search + category filtering manually
             if (isFiltered) {
                 if (searchTerm.trim()) {
                     const search = searchTerm.toLowerCase();
@@ -258,13 +256,12 @@ export async function renderPetCard(petId = null, searchTerm = "", category = ""
                     renderPetCard(null, "", "", newPage);
                 });
             } else {
-                paginationContainer.innerHTML = ""; // Clear pagination if filtered
+                paginationContainer.innerHTML = "";
             }
         }
     } catch (error) {
         console.error("Fetch failed:", error);
-        const fallback = `<h1>Failed to Load. Please try again later</h1>`;
-        (petId ? detailContainer : cardContainer).innerHTML = fallback;
+        (petId ? detailContainer : cardContainer).innerHTML = `<h1>Failed to Load. Please try again later</h1>`;
     }
 }
 

@@ -16,7 +16,7 @@ export default async function router(pathname = window.location.pathname) {
             await import("./views/create.js");
             break;
         case "/pet/edit/":
-            await import("./views/edit.js");
+            await import("./views/update.js");
             break;
         case "/admin/":
             await import("./views/admin.js");
