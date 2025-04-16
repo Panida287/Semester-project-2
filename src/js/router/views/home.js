@@ -1,17 +1,11 @@
-import { renderFooter } from "../../utilities/footer.js";
-import { renderHeader } from "../../utilities/header.js";
-import { renderPetCard } from "../../ui/pet/display.js";
-import { setupFilterControls } from "../../utilities/filter.js";
+import { renderFooter } from '../../ui/footer.js';
+import { renderHeader } from '../../ui/header.js';
+import {renderPetCard} from "../../ui/pet/display.js";
+import {setupFilterControls} from "../../utilities/filter.js";
 import {setupFilterButtonState} from "../../utilities/setupFilterButtonState.js";
-import {mobileNav} from "../../utilities/mobileNav.js";
 
 renderHeader();
 renderFooter();
-const isMobile = window.innerWidth <= 480;
-if (isMobile) {
-    mobileNav()
-}
-
 
 setupFilterControls({
     searchInputId: "searchInput",
@@ -22,4 +16,4 @@ setupFilterControls({
     renderFn: renderPetCard,
 });
 
-setupFilterButtonState()
+setupFilterButtonState();

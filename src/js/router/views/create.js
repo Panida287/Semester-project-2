@@ -1,16 +1,10 @@
 import {createPet} from "../../api/pet/create.js";
 import {setupPreview} from "../../utilities/preview.js";
 import {authGuard} from "../../utilities/authGaurd.js";
-import {renderFooter} from "../../utilities/footer.js";
-import {mobileNav} from "../../utilities/mobileNav.js";
+import {renderFooter} from "../../ui/footer.js";
 
 authGuard(authGuard);
 renderFooter();
-
-const isMobile = window.innerWidth <= 480;
-if (isMobile) {
-    mobileNav()
-}
 
 const form = document.getElementById("create-form");
 const imageUrlInput = document.getElementById("image-url");
@@ -45,8 +39,13 @@ form?.addEventListener("submit", async ( e ) => {
         alert("Pet has been created successfully!");
         window.location.href = `/pet/?id=${newPet.id}`;
     } catch (error) {
-        console.error("Create failed:", error);
-        errorDiv.textContent = error.message || "Failed to create pet.";
+        console.error("Failed to create pet:", error.message);
+        
+        if (error.message.includes("Image is not accessible")) {
+            errorDiv.textContent = "Image is not accessible, please double check the image address.";
+        } else {
+            errorDiv.textContent = error.message || "Something went wrong. Please try again.";
+        }
     }
 });
 

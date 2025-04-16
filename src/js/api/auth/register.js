@@ -51,12 +51,18 @@ export async function register({
         });
 
         const result = await response.json();
-
+        
         if (!response.ok) {
-            errorDiv.textContent = result.errors?.[0]?.message || "Unknown error occurred.";
+            const rawMsg = result.errors?.[0]?.message || "Unknown error occurred.";
+            
+            if (rawMsg.toLowerCase().includes("image is not accessible")) {
+                errorDiv.textContent = "Image is not accessible, please double check the image address.";
+            } else {
+                errorDiv.textContent = rawMsg;
+            }
             return;
         }
-
+        
         successDiv.classList.remove("hidden");
         successDiv.classList.add("flex");
     } catch {
