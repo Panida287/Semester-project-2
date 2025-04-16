@@ -46,9 +46,7 @@ form?.addEventListener("submit", async ( e ) => {
         } else {
             errorDiv.textContent = error.message || "Something went wrong. Please try again.";
         }
-        errorDiv.classList.remove("hidden");
     }
-    
 });
 
 cancelBtn?.addEventListener("click", () => {

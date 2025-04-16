@@ -88,8 +88,13 @@ form?.addEventListener("submit", async ( e ) => {
         alert("Pet updated successfully!");
         window.location.href = `/pet/?id=${editingPetId}`;
     } catch (error) {
-        console.error("Update failed:", error);
-        errorDiv.textContent = error.message || "Failed to update pet.";
+        console.error("Failed to create pet:", error.message);
+        
+        if (error.message.includes("Image is not accessible")) {
+            errorDiv.textContent = "Image is not accessible, please double check the image address.";
+        } else {
+            errorDiv.textContent = error.message || "Something went wrong. Please try again.";
+        }
     }
 });
 
