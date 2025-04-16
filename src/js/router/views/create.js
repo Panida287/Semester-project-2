@@ -7,6 +7,7 @@ import { createPet } from "../../api/pet/create.js";
 import { setupPreview } from "../../utilities/preview.js";
 import { authGuard } from "../../utilities/authGuard.js";
 import { renderFooter } from "../../ui/footer.js";
+import { showInfoModal } from "../../utilities/modal.js";
 
 authGuard(authGuard);
 renderFooter();
@@ -40,8 +41,10 @@ form?.addEventListener("submit", async (e) => {
     try {
         const response = await createPet(formData);
         const newPet = response.data;
-        alert("Pet has been created successfully!");
-        window.location.href = `/pet/?id=${newPet.id}`;
+        
+        showInfoModal("Pet has been created successfully!", () => {
+            window.location.href = `/pet/?id=${newPet.id}`;
+        });
     } catch (error) {
         errorDiv.textContent = error.message.includes("Image is not accessible")
             ? "Image is not accessible, please double check the image address."
@@ -56,3 +59,6 @@ cancelBtn?.addEventListener("click", () => {
 if (imageUrlInput && imagePreview) {
     setupPreview(imageUrlInput, imagePreview);
 }
+
+
+

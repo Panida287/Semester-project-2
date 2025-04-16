@@ -130,5 +130,17 @@
     </div>
 </template>
 
+<!-- Confirm Modal -->
+<div id="confirm-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div class="bg-white p-6 rounded-lg max-w-sm w-full text-center shadow-lg">
+        <p id="confirm-modal-message" class="text-gray-800 mb-4">Are you sure?</p>
+        <div class="flex justify-center gap-4">
+            <button id="confirm-modal-cancel" class="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100">Cancel</button>
+            <button id="confirm-modal-accept" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Yes</button>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>

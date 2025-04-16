@@ -3,6 +3,7 @@ import { getPets } from "../../api/pet/read.js";
 import { deletePet } from "../../api/pet/delete.js";
 import { updatePet } from "../../api/pet/update.js";
 import { renderPagination } from "../../utilities/renderPagination.js";
+import { showConfirmModal } from '../../utilities/modal.js';
 
 /**
  * Renders a pet card or detail/admin template based on mode.
@@ -139,7 +140,9 @@ export function renderPetTemplate(pet, mode = "card") {
         const deleteBtn = clone.querySelector(".delete-btn");
         if (deleteBtn) {
             deleteBtn.addEventListener("click", async () => {
-                if (!confirm(`Delete ${pet.name}?`)) return;
+                const confirmed = await showConfirmModal(`Delete ${pet.name}? This cannot be undone.`);
+                if (!confirmed) return;
+                
                 try {
                     await deletePet(pet.id);
                     document.getElementById(`pet-${pet.id}`)?.remove();

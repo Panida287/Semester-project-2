@@ -4,6 +4,7 @@ import { setupPreview } from "../../utilities/preview.js";
 import { getIdFromUrl } from "../../utilities/getId.js";
 import { authGuard } from "../../utilities/authGuard.js";
 import { renderFooter } from "../../ui/footer.js";
+import { showInfoModal } from '../../utilities/modal.js';
 
 authGuard();
 renderFooter();
@@ -88,8 +89,9 @@ form?.addEventListener("submit", async (e) => {
     
     try {
         await updatePet({ ...formData, id: editingPetId });
-        alert("Pet updated successfully!");
-        window.location.href = `/pet/?id=${editingPetId}`;
+        showInfoModal("Pet updated successfully!", () => {
+            window.location.href = `/pet/?id=${editingPetId}`;
+        });
     } catch (error) {
         if (error.message.includes("Image is not accessible")) {
             errorDiv.textContent = "Image is not accessible, please double check the image address.";
