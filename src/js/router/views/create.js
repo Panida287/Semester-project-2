@@ -9,7 +9,7 @@ import { authGuard } from "../../utilities/authGuard.js";
 import { renderFooter } from "../../ui/footer.js";
 import { showInfoModal } from "../../utilities/modal.js";
 
-authGuard(authGuard);
+authGuard();
 renderFooter();
 
 const form = document.getElementById("create-form");

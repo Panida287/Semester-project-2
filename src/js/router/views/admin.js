@@ -5,7 +5,7 @@ import { authGuard } from '../../utilities/authGuard.js';
 import { setupFilterButtonState } from "../../utilities/setupFilterButtonState.js";
 import { renderFooter } from "../../ui/footer.js";
 
-authGuard(authGuard);
+authGuard();
 
 renderFooter();
 setLogoutListener();
