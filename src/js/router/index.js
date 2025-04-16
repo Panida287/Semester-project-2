@@ -1,3 +1,11 @@
+/**
+ * Handles routing based on the current pathname.
+ *
+ * Dynamically imports the corresponding view module based on the path.
+ * Defaults to loading the Not Found page if no route matches.
+ *
+ * @param {string} [pathname=window.location.pathname] - The current URL path.
+ */
 export default async function router(pathname = window.location.pathname) {
     switch (pathname) {
         case "/":

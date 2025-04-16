@@ -1,9 +1,9 @@
-import {getPets} from "../../api/pet/read.js";
-import {updatePet} from "../../api/pet/update.js";
-import {setupPreview} from "../../utilities/preview.js";
-import {getIdFromUrl} from "../../utilities/getId.js";
-import {authGuard} from "../../utilities/authGaurd.js";
-import {renderFooter} from "../../ui/footer.js";
+import { getPets } from "../../api/pet/read.js";
+import { updatePet } from "../../api/pet/update.js";
+import { setupPreview } from "../../utilities/preview.js";
+import { getIdFromUrl } from "../../utilities/getId.js";
+import { authGuard } from "../../utilities/authGuard.js";
+import { renderFooter } from "../../ui/footer.js";
 
 authGuard();
 renderFooter();
@@ -19,7 +19,11 @@ const updatePetImg = document.querySelector(".update-pet-img");
 let editingPetId = null;
 let currentPet = null;
 
-function populatePetForm( pet ) {
+/**
+ * Fills the edit form fields with pet data.
+ * @param {Object} pet - The pet object to populate in the form.
+ */
+function populatePetForm(pet) {
     document.getElementById("name").value = pet.name || "";
     document.getElementById("species").value = pet.species || "";
     document.getElementById("breed").value = pet.breed || "";
@@ -31,11 +35,11 @@ function populatePetForm( pet ) {
     document.getElementById("location").value = pet.location || "";
     document.getElementById("image-url").value = pet.image?.url || "";
     document.getElementById("image-alt").value = pet.image?.alt || "";
-
+    
     updateHeader.textContent = `Updating ${pet.name}`;
     updatePetImg.src = pet.image?.url;
     updatePetImg.alt = pet.name;
-
+    
     const preview = document.getElementById("image-preview");
     if (preview) {
         preview.src = pet.image?.url || "";
@@ -44,25 +48,28 @@ function populatePetForm( pet ) {
     }
 }
 
+/**
+ * Initializes the edit page by fetching the pet data based on ID in the URL.
+ */
 async function initEditPage() {
     const id = getIdFromUrl("id");
     editingPetId = id;
-
+    
     try {
         const response = await getPets({ petId: id });
         currentPet = response.data;
         if (!currentPet) throw new Error("Pet not found");
-
+        
         populatePetForm(currentPet);
     } catch (error) {
-        console.error("Failed to load pet:", error);
         errorDiv.textContent = error.message || "Failed to load pet data.";
     }
 }
 
-form?.addEventListener("submit", async ( e ) => {
+// Handle form submission for updating pet
+form?.addEventListener("submit", async (e) => {
     e.preventDefault();
-
+    
     const formData = {
         name: document.getElementById("name").value.trim(),
         species: document.getElementById("species").value.trim(),
@@ -78,17 +85,12 @@ form?.addEventListener("submit", async ( e ) => {
             alt: document.getElementById("image-alt").value.trim(),
         },
     };
-
+    
     try {
-        await updatePet({
-            ...formData,
-            id: editingPetId,
-        });
+        await updatePet({ ...formData, id: editingPetId });
         alert("Pet updated successfully!");
         window.location.href = `/pet/?id=${editingPetId}`;
     } catch (error) {
-        console.error("Failed to create pet:", error.message);
-        
         if (error.message.includes("Image is not accessible")) {
             errorDiv.textContent = "Image is not accessible, please double check the image address.";
         } else {
@@ -105,4 +107,5 @@ if (imageUrlInput && imagePreview) {
     setupPreview(imageUrlInput, imagePreview);
 }
 
+// Load pet data on page init
 initEditPage();

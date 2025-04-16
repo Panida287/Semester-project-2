@@ -1,12 +1,13 @@
-import {renderPetCardAdmin} from "../../ui/admin/display.js";
-import {setupFilterControls} from "../../utilities/filter.js";
-import {setLogoutListener} from "../../ui/global/logout.js";
-import {authGuard} from "../../utilities/authGaurd.js";
-import {setupFilterButtonState} from "../../utilities/setupFilterButtonState.js";
-import {renderFooter} from "../../ui/footer.js";
+import { renderPetCardAdmin } from "../../ui/admin/display.js";
+import { setupFilterControls } from "../../utilities/filter.js";
+import { setLogoutListener } from "../../ui/global/logout.js";
+import { authGuard } from '../../utilities/authGuard.js';
+import { setupFilterButtonState } from "../../utilities/setupFilterButtonState.js";
+import { renderFooter } from "../../ui/footer.js";
 
 authGuard(authGuard);
-renderFooter()
+
+renderFooter();
 setLogoutListener();
 
 document.getElementById("add-btn")?.addEventListener("click", () => {
@@ -23,6 +24,3 @@ setupFilterControls({
 });
 
 setupFilterButtonState();
-
-
-

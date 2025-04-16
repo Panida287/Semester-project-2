@@ -10,25 +10,19 @@ import { API_AUTH_REGISTER } from "../constants";
  * @param {string} userData.password - The password for the user's account.
  * @param {string} userData.repeatPassword - The repeated password for confirmation.
  * @param {string} [userData.avatar] - Optional URL for the user's profile avatar image.
- * @returns {Promise<void>} Resolves if registration is successful, otherwise handles errors.
+ * @returns {Promise<void>} Resolves if registration is successful, otherwise handles and displays errors.
  */
-export async function register({
-    name,
-    email,
-    password,
-    repeatPassword,
-    avatar,
-}) {
+export async function register({ name, email, password, repeatPassword, avatar }) {
     const errorDiv = document.querySelector(".error-msg");
     const successDiv = document.querySelector(".register-success");
-
+    
     errorDiv.textContent = "";
-
+    
     if (password !== repeatPassword) {
         errorDiv.textContent = "Passwords do not match.";
         return;
     }
-
+    
     const userInput = {
         name,
         email,
@@ -40,7 +34,7 @@ export async function register({
             },
         }),
     };
-
+    
     try {
         const response = await fetch(API_AUTH_REGISTER, {
             method: "POST",
@@ -49,17 +43,14 @@ export async function register({
             },
             body: JSON.stringify(userInput),
         });
-
+        
         const result = await response.json();
         
         if (!response.ok) {
             const rawMsg = result.errors?.[0]?.message || "Unknown error occurred.";
-            
-            if (rawMsg.toLowerCase().includes("image is not accessible")) {
-                errorDiv.textContent = "Image is not accessible, please double check the image address.";
-            } else {
-                errorDiv.textContent = rawMsg;
-            }
+            errorDiv.textContent = rawMsg.toLowerCase().includes("image is not accessible")
+                ? "Image is not accessible, please double check the image address."
+                : rawMsg;
             return;
         }
         
