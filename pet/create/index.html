@@ -2,29 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta property="og:image" content="assets/favicon_io/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Add a new pet to the Pet Pal adoption platform. Provide species, age, gender, and location details." />
+    <meta name="keywords" content="pet adoption, add pet, Pet Pal admin, animal shelter" />
+    <meta name="author" content="Pet Pal Team" />
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:title" content="Add New Pet | Pet Pal" />
+    <meta property="og:description" content="Add a new pet to the adoption listing on Pet Pal." />
+    <meta property="og:image" content="/assets/favicon_io/apple-touch-icon.png" />
+    <meta property="og:url" content="https://yourdomain.com/pet/create" />
+    <meta property="og:type" content="website" />
+
+    <!-- Icons -->
     <link rel="icon" type="image/png" sizes="180x180" href="/public/assets/favicon_io/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/favicon_io/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/public/assets/favicon_io/favicon-16x16.png" />
+
+    <!-- Styles & Scripts -->
     <link rel="stylesheet" href="../../src/css/style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="../../src/js/main.js"></script>
     <script src="https://kit.fontawesome.com/23a7bf8149.js" crossorigin="anonymous"></script>
-    <title>Add New Pet</title>
+
+    <title>Add New Pet | Pet Pal</title>
 </head>
+
 <body>
 <header class="flex items-center justify-between px-6 py-4 bg-white shadow">
     <div class="w-full max-w-screen-lg mx-auto flex items-center justify-between">
-        <a href="/admin/" class="text-xl font-bold text-gray-800 w-full">🐾 Pet Admin</a>
-        <button class="logout-btn button bg-primary text-accent">Logout</button>
+        <a href="/admin/" class="text-xl font-bold text-gray-800 w-full" aria-label="Go back to Pet Admin Dashboard">🐾 Pet Admin</a>
+        <button class="logout-btn button bg-primary text-accent" aria-label="Logout from admin panel">Logout</button>
     </div>
 </header>
 
 <main>
     <div class="flex flex-col items-center justify-center min-h-full p-4">
         <h1 class="m-5 font-extrabold text-primary text-xl">Add new pet</h1>
-        <form id="create-form" class="bg-white w-full max-w-4xl rounded-xl shadow-lg mb-10">
-            <div class="p-6 space-y-6">
+        <form id="create-form" aria-label="Add new pet form" class="bg-white w-full max-w-4xl rounded-xl shadow-lg mb-10">
+        <div class="p-6 space-y-6">
                 <div class="grid md:grid-cols-2 gap-6">
                     <div>
                         <label for="name" class="text-sm font-semibold mb-2">Name</label>
@@ -58,12 +75,14 @@
                             <option>Other</option>
                         </select>
 
-                        <h3 class="text-sm font-semibold mb-2">Gender</h3>
-                        <div class="flex items-center space-x-4 mb-3">
-                            <label><input type="radio" name="gender" value="male" class="mr-1" /> Male</label>
-                            <label><input type="radio" name="gender" value="female" class="mr-1" /> Female</label>
-                            <label><input type="radio" name="gender" value="unknown" class="mr-1" /> Unknown</label>
-                        </div>
+                        <fieldset class="mb-3">
+                            <legend class="text-sm font-semibold mb-2">Gender</legend>
+                            <div class="flex items-center space-x-4">
+                                <label><input type="radio" name="gender" value="male" class="mr-1" aria-label="Gender male" /> Male</label>
+                                <label><input type="radio" name="gender" value="female" class="mr-1" aria-label="Gender female" /> Female</label>
+                                <label><input type="radio" name="gender" value="unknown" class="mr-1" aria-label="Gender unknown" /> Unknown</label>
+                            </div>
+                        </fieldset>
 
                         <label for="color" class="text-sm font-semibold mb-2">Color</label>
                         <input id="color" type="text" placeholder="Enter color"
@@ -92,8 +111,10 @@
                     <div class="mt-4">
                         <img id="image-preview"
                              src=""
-                             alt="Preview of the item image"
-                             class="hidden  max-h-96 justify-self-center object-contain border border-gray-300 rounded-md" />
+                             alt="Preview of pet image"
+                             class="hidden max-h-96 justify-self-center object-contain border border-gray-300 rounded-md"
+                             aria-hidden="true"
+                        />
                     </div>
 
                     <label for="image-alt" class="text-sm font-semibold mb-2">Image Alt Text</label>
@@ -102,18 +123,17 @@
                 </div>
             </div>
 
-            <h3 class="error-div text-red-600 text-sm font-semibold px-6 pb-2 break-words max-w-full"></h3>
-
+            <h3 class="error-div text-red-600 text-sm font-semibold px-6 pb-2 break-words max-w-full" aria-live="polite"></h3>
 
             <div class="flex justify-between items-center px-6 py-4 border-t">
-                <button type="button" class="cancel-btn text-gray-500 hover:text-black">Cancel</button>
-                <button type="submit" class="button bg-primary hover:bg-orange-400 text-white">
+                <button type="button" class="cancel-btn text-gray-500 hover:text-black" aria-label="Cancel and go back">Cancel</button>
+                <button type="submit" class="button bg-primary hover:bg-orange-400 text-white" aria-label="Save new pet">
                     Save Pet
                 </button>
             </div>
         </form>
-
     </div>
+
 </main>
 
 <footer></footer>

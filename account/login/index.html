@@ -2,16 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta property="og:image" content="assets/favicon_io/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Login to Pet Pal to find your perfect pet companion. Secure access for students of Noroff with stud.noroff.no email." />
+    <meta name="keywords" content="pet adoption, Noroff, pet pal, login, student portal" />
+    <meta name="author" content="Pet Pal Team" />
+
+    <!-- Open Graph / Social Media Sharing -->
+    <meta property="og:title" content="Login | Pet Pal" />
+    <meta property="og:description" content="Access your Pet Pal account to explore adoptable pets and manage your profile." />
+    <meta property="og:image" content="/assets/favicon_io/apple-touch-icon.png" />
+    <meta property="og:url" content="https://yourdomain.com/account/login" />
+    <meta property="og:type" content="website" />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="180x180" href="/public/assets/favicon_io/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/favicon_io/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/public/assets/favicon_io/favicon-16x16.png" />
+
+    <!-- Styles & Scripts -->
     <link rel="stylesheet" href="../../src/css/style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" src="../../src/js/main.js"></script>
     <script src="https://kit.fontawesome.com/23a7bf8149.js" crossorigin="anonymous"></script>
-    <title>Login</title>
+
+    <title>Login | Pet Pal</title>
 </head>
+
 
 <body class="min-h-screen bg-accent flex flex-col md:flex-row items-start md:items-center justify-center p-6 overflow-auto">
 
@@ -24,7 +41,7 @@
 <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8 backdrop-blur-xl">
     <h2 class="text-center text-2xl font-semibold text-text mb-6">Login</h2>
 
-    <form name="login" class="flex flex-col gap-4">
+    <form name="login" aria-label="Login form" class="flex flex-col gap-4">
         <!-- Email -->
         <div>
             <label for="email" class="text-sm font-medium text-text">Email</label>
@@ -35,7 +52,10 @@
                 placeholder="yourname@stud.noroff.no"
                 required
                 class="input-field mt-2"
+                aria-required="true"
+                aria-describedby="emailHelp"
             />
+            <small id="emailHelp" class="sr-only">Enter your Noroff student email address</small>
         </div>
 
         <!-- Password -->
@@ -48,17 +68,20 @@
                 minlength="8"
                 required
                 class="input-field mt-2 pr-10 password"
+                aria-required="true"
+                aria-describedby="passwordHelp"
             />
-            <button type="button" class="toggle-password absolute right-3 top-9 text-gray-500 text-sm">
+            <small id="passwordHelp" class="sr-only">Password must be at least 8 characters</small>
+            <button type="button" class="toggle-password absolute right-3 top-9 text-gray-500 text-sm" aria-label="Toggle password visibility">
                 <i class="fas fa-eye"></i>
             </button>
         </div>
 
         <!-- Error Message -->
-        <p class="error-msg text-center text-sm text-red-500"></p>
+        <p class="error-msg text-center text-sm text-red-500" role="alert" aria-live="assertive"></p>
 
         <!-- Submit Button -->
-        <button type="submit" class="button bg-primary hover:bg-orange-400 text-white w-full py-2 rounded-md">
+        <button type="submit" class="button bg-primary hover:bg-orange-400 text-white w-full py-2 rounded-md" aria-label="Login to your account">
             Login
         </button>
     </form>

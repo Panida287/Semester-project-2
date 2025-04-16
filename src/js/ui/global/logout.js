@@ -1,18 +1,18 @@
-import {onLogout} from "../auth/logout";
+import { onLogout } from "../auth/logout";
 
 /**
- * Adds click event listeners to all logout buttons.
+ * Attaches click listeners to all elements with the `logout-btn` class.
  *
- * When a logout button is clicked, this function prompts the user for confirmation.
- * If the user confirms, it calls the `onLogout` function to log the user out.
+ * When clicked, the user is prompted to confirm logout. If confirmed,
+ * the `onLogout` function is called to clear user session and redirect.
  */
 export function setLogoutListener() {
     const logoutButtons = document.querySelectorAll(".logout-btn");
-
+    
     logoutButtons.forEach(button => {
         button.addEventListener("click", () => {
-            const confirmation = window.confirm("Are you sure you want to log out?");
-            if (confirmation) {
+            const confirmed = confirm("Are you sure you want to log out?");
+            if (confirmed) {
                 onLogout();
             }
         });
