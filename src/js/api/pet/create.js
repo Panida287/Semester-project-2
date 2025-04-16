@@ -29,8 +29,7 @@ export async function createPet({ name, species, breed, gender, age, size, color
             const errorMsg = data.errors?.[0]?.message || "Unknown error occurred.";
             throw new Error(errorMsg);
         }
-
-
+        
         return data;
     } catch (error) {
         console.error("Fetch error:", error);
