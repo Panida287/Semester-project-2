@@ -15,6 +15,9 @@ export async function renderPetCardAdmin(petId = null, searchTerm = "", category
         }
 
         let userPets = pets.filter(pet => pet.owner?.name === loggedInUser);
+        console.log(userPets);
+        console.log(loggedInUser);
+        console.log(pets);
 
         if (searchTerm?.trim()) {
             const lowerSearch = searchTerm.toLowerCase();

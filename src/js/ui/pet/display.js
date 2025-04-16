@@ -199,7 +199,7 @@ export async function renderPetCard(petId = null, searchTerm = "", category = ""
 
     try {
         if (petId) {
-            const response = await getPets({ petId });
+            const response = await getPets({ petId, limit: 12, page: currentPage });
             const pet = response.data;
 
             if (!pet) {
