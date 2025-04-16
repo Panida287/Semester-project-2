@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+          content="Create your Pet Pal account to discover, adopt, and care for your perfect pet companion." />
+    <meta name="keywords" content="pet adoption, register, pet pal, student, Noroff, create account" />
+    <meta name="author" content="Pet Pal Team" />
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:title" content="Register | Pet Pal" />
+    <meta property="og:description" content="Join Pet Pal and start your journey to find the perfect pet match." />
+    <meta property="og:image" content="/assets/favicon_io/apple-touch-icon.png" />
+    <meta property="og:url" content="https://yourdomain.com/account/register" />
+    <meta property="og:type" content="website" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="180x180" href="/public/assets/favicon_io/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/favicon_io/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/assets/favicon_io/favicon-16x16.png" />
+
+    <!-- Styles & Scripts -->
+    <link rel="stylesheet" href="../../src/css/style.css" />
+    <script type="module" src="../../src/js/main.js"></script>
+    <script src="https://kit.fontawesome.com/23a7bf8149.js" crossorigin="anonymous"></script>
+
+    <title>Register | Pet Pal</title>
+</head>
+
+<body
+    class="min-h-screen bg-accent flex flex-col md:flex-row items-start justify-start md:items-center md:justify-center p-6 overflow-auto">
+
+<!-- Left Side Title -->
+<div class="hidden md:flex flex-col justify-center items-center w-1/2">
+    <h1 class="text-4xl font-extrabold text-text mb-2">🐾 Pet Pal</h1>
+    <p class="text-text text-lg font-medium">Join the family!</p>
+</div>
+
+<!-- Registration Form Card -->
+<div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8 backdrop-blur-xl">
+    <h2 class="text-center text-2xl font-semibold text-text mb-6">Create Your Account</h2>
+
+    <form name="register" aria-label="Registration form" class="flex flex-col gap-4">
+        <!-- Username -->
+        <div>
+            <label for="userName" class="text-sm font-medium text-text">Username</label>
+            <input id="userName" name="userName" type="text" placeholder="Enter username" required
+                   aria-required="true" />
+        </div>
+
+        <!-- Email -->
+        <div>
+            <label for="email" class="text-sm font-medium text-text">Email</label>
+            <input id="email" name="email" type="email" placeholder="yourname@stud.noroff.no" required
+                   aria-required="true" />
+        </div>
+
+        <!-- Password -->
+        <div class="relative">
+            <label for="password" class="text-sm font-medium text-text">Password</label>
+            <input id="password" name="password" type="password" minlength="8" required
+                   class="pr-10 mt-2 password" aria-required="true" aria-describedby="passwordHelp" />
+            <small id="passwordHelp" class="sr-only">Password must be at least 8 characters</small>
+            <button type="button" class="toggle-password absolute right-3 top-10 text-gray-500 text-sm"
+                    aria-label="Toggle password visibility">
+                <i class="fas fa-eye"></i>
+            </button>
+        </div>
+
+        <!-- Repeat Password -->
+        <div class="relative">
+            <label for="repeat-password" class="text-sm font-medium text-text">Repeat Password</label>
+            <input id="repeat-password" name="repeat-password" type="password" minlength="8" required
+                   class="pr-10 mt-2 password" aria-required="true" aria-describedby="repeatPasswordHelp" />
+            <small id="repeatPasswordHelp" class="sr-only">Repeat your password</small>
+            <button type="button" class="toggle-password absolute right-3 top-10 text-gray-500 text-sm"
+                    aria-label="Toggle password visibility">
+                <i class="fas fa-eye"></i>
+            </button>
+        </div>
+
+        <!-- Avatar -->
+        <div>
+            <label for="avatar" class="text-sm font-medium text-text">Avatar (optional)</label>
+            <input id="avatar" name="avatar" type="url" placeholder="Image URL" aria-describedby="avatarHelp" />
+            <small id="avatarHelp" class="sr-only">Optional image URL for your avatar</small>
+        </div>
+
+        <!-- Avatar Preview -->
+        <div class="flex justify-center" aria-hidden="true">
+            <img id="image-preview"
+                 src=""
+                 alt="Avatar preview"
+                 class="hidden h-20 w-20 object-cover border border-gray-300 rounded-full" />
+        </div>
+
+        <!-- Bio -->
+        <div>
+            <label for="bio" class="text-sm font-medium text-text">Bio (optional)</label>
+            <textarea id="bio" name="bio" placeholder="Tell us a bit about yourself"
+                      class="resize-none h-24" aria-describedby="bioHelp"></textarea>
+            <small id="bioHelp" class="sr-only">Optional personal introduction</small>
+        </div>
+
+        <!-- Error Message -->
+        <p class="error-msg text-center text-sm text-red-500" role="alert" aria-live="assertive"></p>
+
+        <!-- Submit Button -->
+        <button type="submit" class="button bg-primary hover:bg-orange-400 text-white py-2 mt-2 w-full rounded-md"
+                aria-label="Create your Pet Pal account">
+            Register
+        </button>
+    </form>
+
+
+    <!-- Login & Guest Links -->
+    <div class="text-center mt-6 text-sm text-text">
+        <p>
+            Already registered?
+            <a href="/account/login/" class="font-semibold hover:underline">Login here</a>
+        </p>
+        <p class="mt-2">or</p>
+        <a href="/" class="font-semibold hover:underline">Continue as guest</a>
+    </div>
+</div>
+<!-- Success Modal -->
+<div class="register-success hidden fixed inset-0 bg-black bg-opacity-50 z-50 items-center justify-center"
+     role="dialog" aria-modal="true" aria-labelledby="registerSuccessTitle" aria-describedby="registerSuccessDesc">
+    <div class=" bg-white rounded-xl shadow-2xl p-6 max-w-sm w-[90%] text-center">
+    <h2 class="text-xl font-bold text-primary mb-4">Registration Successful!</h2>
+        <p class="text-gray-700 mb-4">Your account has been created.</p>
+        <a href="/account/login/"
+           class="inline-block mt-2 px-5 py-2 bg-primary text-white rounded-full font-medium hover:bg-orange-400 transition"
+           aria-label="Proceed to login page">
+            Proceed to Login
+        </a>
+    </div>
+</div>
+
+</body>
+
+</html>
