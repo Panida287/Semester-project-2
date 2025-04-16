@@ -9,15 +9,15 @@ export async function renderPetCardAdmin(petId = null, searchTerm = "", category
         const response = await getPets();
         const pets = response.data;
 
-        if (!pets || !loggedInUser) {
-            cardContainer.innerHTML = `<h1>No pet found</h1>`;
-            return;
-        }
-
         let userPets = pets.filter(pet => pet.owner?.name === loggedInUser);
         console.log(userPets);
         console.log(loggedInUser);
         console.log(pets);
+        
+        if (userPets.length === 0 && !searchTerm && (!category || category === "all")) {
+            cardContainer.innerHTML = `<h1>You don't have any pets. Click + Add Pet to add new pet!</h1>`;
+            return;
+        }
 
         if (searchTerm?.trim()) {
             const lowerSearch = searchTerm.toLowerCase();
@@ -40,9 +40,9 @@ export async function renderPetCardAdmin(petId = null, searchTerm = "", category
                 );
             }
         }
-
+        
         if (userPets.length === 0) {
-            cardContainer.innerHTML = `<h1>No pets match your filter.</h1>`;
+            cardContainer.innerHTML = `<h1>No pets found.</h1>`;
             return;
         }
 
