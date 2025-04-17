@@ -128,9 +128,3 @@ Hosted via **Netlify** at [pet-adoption-dev.netlify.app](https://pet-adoption-de
 This project is for educational purposes under Noroff's guidelines and is not intended for production use or distribution.
 
 ---
-
-## 🙌 Acknowledgements
-
-Thanks to Noroff and the official [Noroff v2 API documentation](https://docs.noroff.dev/docs/v2/basic/pets) and [Swagger UI](https://v2.api.noroff.dev/docs/static/index.html#/pets) for supporting this project.
-
->>>>>>> Stashed changes
