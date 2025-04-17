@@ -3,7 +3,7 @@ import { getPets } from "../../api/pet/read.js";
 import { deletePet } from "../../api/pet/delete.js";
 import { updatePet } from "../../api/pet/update.js";
 import { renderPagination } from "../../utilities/renderPagination.js";
-import { showConfirmModal } from '../../utilities/modal.js';
+import { showConfirmModal, showInfoModal } from '../../utilities/modal.js';
 
 /**
  * Renders a pet card or detail/admin template based on mode.
@@ -146,8 +146,9 @@ export function renderPetTemplate(pet, mode = "card") {
                 try {
                     await deletePet(pet.id);
                     document.getElementById(`pet-${pet.id}`)?.remove();
-                    alert(`${pet.name} deleted successfully!`);
-                    window.location.reload();
+                    showInfoModal(`${pet.name} deleted successfully!`, () => {
+                        window.location.reload();
+                    });
                 } catch (error) {
                     alert(`Failed to delete pet: ${error.message}`);
                 }
@@ -173,12 +174,14 @@ export function renderPetTemplate(pet, mode = "card") {
                 option.addEventListener("click", async () => {
                     const newStatus = option.dataset.value;
                     if (newStatus === pet.adoptionStatus?.toLowerCase()) return;
-                    if (!confirm(`Change status to "${newStatus}" for ${pet.name}?`)) return;
+                    const confirmed = await showConfirmModal(`Change status to "${newStatus}" for ${pet.name}?`);
+                    if (!confirmed) return;
                     
                     try {
                         await updatePet({ id: pet.id, adoptionStatus: newStatus });
-                        alert(`Status updated to "${newStatus}"`);
-                        window.location.reload();
+                        showInfoModal(`Status updated to "${newStatus}"`, () => {
+                            window.location.reload();
+                        });
                     } catch (error) {
                         alert("Failed to update status: " + error.message);
                     }
