@@ -150,7 +150,7 @@ export function renderPetTemplate(pet, mode = "card") {
                         window.location.reload();
                     });
                 } catch (error) {
-                    alert(`Failed to delete pet: ${error.message}`);
+                    showInfoModal(`Failed to delete ${pet.name}: ${error.message}`, () => {})
                 }
             });
         }
@@ -183,7 +183,7 @@ export function renderPetTemplate(pet, mode = "card") {
                             window.location.reload();
                         });
                     } catch (error) {
-                        alert("Failed to update status: " + error.message);
+                        showInfoModal(`Failed to update status: ${error.message}`, () => {})
                     }
                 });
             });
