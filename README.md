@@ -117,27 +117,6 @@ npm run dev
 
 ---
 
-## ✅ Completed User Stories
-
-- [x] Browse all pets
-- [x] View pet details
-- [x] Search pets
-- [x] Register as admin
-- [x] Login/logout
-- [x] Add/edit/delete pets
-- [x] Copy shareable links
-- [x] Modals for feedback and confirmation
-
----
-
-## 🔍 Testing & Validation
-
-- ✅ Manual story testing completed
-- ✅ HTML validated using [W3C Validator](https://validator.w3.org/)
-- ✅ Lighthouse and WAVE tested for accessibility and performance
-
----
-
 ## 📂 Deployment
 
 Hosted via **Netlify** at [pet-adoption-dev.netlify.app](https://pet-adoption-dev.netlify.app). The project uses Vite for building and bundling.
