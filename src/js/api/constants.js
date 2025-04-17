@@ -14,9 +14,11 @@ export const FALLBACK_IMG = "../assets/images/fallback-image.png";
 
 /**
  * API key used for authorization with the Noroff API.
+ * Loaded from environment variables via Vite.
  * @type {string}
  */
-export const API_KEY = "0876d63b-6108-4b3f-a47b-398537cdec93";
+export const API_KEY = import.meta.env.VITE_API_KEY;
+
 
 /**
  * Base URL for the Noroff API.
