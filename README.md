@@ -38,15 +38,15 @@ This project fulfills all user stories outlined in the official brief.
 
 ## 🛠️ Tech Stack
 
-| Category        | Tools & Technologies                     |
-|----------------|------------------------------------------|
-| Language        | Vanilla JavaScript (ES Modules)         |
-| CSS Framework   | Tailwind CSS 3                          |
-| Build Tool      | Vite                                     |
-| API             | Noroff v2 API                            |
-| Hosting         | Netlify                                  |
-| Planning        | GitHub Projects (Kanban + Roadmap)       |
-| Design          | Figma (Style Guide + Prototypes)         |
+| Category        | Tools & Technologies              |
+|----------------|-----------------------------------|
+| Language        | Vanilla JavaScript (ES Modules)   |
+| CSS Framework   | Tailwind CSS 3                    |
+| Build Tool      | Vite                              |
+| API             | Noroff v2 API                     |
+| Hosting         | Netlify                           |
+| Planning        | GitHub Projects (Kanban + Roadmap)|
+| Design          | Figma (Style Guide + Prototypes)  |
 
 ---
 
@@ -105,36 +105,62 @@ npm run dev
 
 ---
 
+## 🔐 Environment Variables & API Key
+
+This project requires an API key to interact with the Noroff API.
+
+### 📍 Get Your API Key
+
+Visit the Noroff API documentation to generate your personal API key:  
+👉 [https://docs.noroff.dev/docs/v2/auth/api-key](https://docs.noroff.dev/docs/v2/auth/api-key)
+
+### ⚙️ How to Use the API Key Locally
+
+1. Create a `.env` file in the root of your project:
+
+```bash
+touch .env
+```
+
+2. Add your API key inside the `.env` file like so:
+
+```env
+VITE_API_KEY=your-api-key-here
+```
+
+> Replace `your-api-key-here` with your actual key from the Noroff dashboard.
+
+3. In your JavaScript, import it using Vite's environment variable syntax:
+
+```js
+const API_KEY = import.meta.env.VITE_API_KEY;
+```
+
+4. Add `.env` to your `.gitignore` to keep it private:
+
+```bash
+echo ".env" >> .gitignore
+```
+
+5. Restart the dev server:
+
+```bash
+npm run dev
+```
+
+You're now ready to securely use the Noroff API in your development environment.
+
+---
+
 ## ✨ Design & Accessibility
 
 - Responsive layout for desktop and mobile.
 - WCAG-compliant color palette.
 - Interactive Figma prototype and style guide with:
-    - Fonts
-    - Colors
-    - Logo
-    - UI Components
-
----
-
-## ✅ Completed User Stories
-
-- [x] Browse all pets
-- [x] View pet details
-- [x] Search pets
-- [x] Register as admin
-- [x] Login/logout
-- [x] Add/edit/delete pets
-- [x] Copy shareable links
-- [x] Modals for feedback and confirmation
-
----
-
-## 🔍 Testing & Validation
-
-- ✅ Manual story testing completed
-- ✅ HTML validated using [W3C Validator](https://validator.w3.org/)
-- ✅ Lighthouse and WAVE tested for accessibility and performance
+  - Fonts
+  - Colors
+  - Logo
+  - UI Components
 
 ---
 
@@ -149,9 +175,3 @@ Hosted via **Netlify** at [pet-adoption-dev.netlify.app](https://pet-adoption-de
 This project is for educational purposes under Noroff's guidelines and is not intended for production use or distribution.
 
 ---
-
-## 🙌 Acknowledgements
-
-Thanks to Noroff and the official [Noroff v2 API documentation](https://docs.noroff.dev/docs/v2/basic/pets) and [Swagger UI](https://v2.api.noroff.dev/docs/static/index.html#/pets) for supporting this project.
-
->>>>>>> Stashed changes
