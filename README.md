@@ -21,6 +21,25 @@ This project fulfills all user stories outlined in the official brief.
 
 ## 🚀 Features
 
+## 📸 Screenshots
+
+<div style="display: flex; justify-content: flex-start; gap: 20px;">
+  <div>
+    <img src="public/assets/images/screenshots/homepage.png" alt="Homepage" width="250"/>
+    <p><strong>Homepage</strong></p>
+  </div>
+  <div>
+    <img src="public/assets/images/screenshots/pet-details.png" alt="Pet Detail Page" width="250"/>
+    <p><strong>Pet Detail</strong></p>
+  </div>
+  <div>
+    <img src="public/assets/images/screenshots/admin.png" alt="Admin Dashboard" width="250"/>
+    <p><strong>Admin Dashboard</strong></p>
+  </div>
+</div>
+
+
+
 ### 🦡 User-facing
 - View a list/grid of all adoptable pets.
 - Search and filter by species.
